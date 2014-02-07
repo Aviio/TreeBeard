@@ -1,10 +1,7 @@
 ﻿
 using System.Collections.Generic;
-using logstash4net.Filters;
-using logstash4net.Inputs;
-using logstash4net.Outputs;
 
-namespace logstash4net.Configuration
+namespace logstash4net.Interfaces
 {
     public interface IConfiguration
     {

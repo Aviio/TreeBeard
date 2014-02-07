@@ -1,11 +1,11 @@
 ﻿
-using System;
 using logstash4net;
 using logstash4net.Configuration;
-using System.Collections.Generic;
 using logstash4net.Inputs;
-using logstash4net.Filters;
+using logstash4net.Interfaces;
 using logstash4net.Outputs;
+using System;
+using System.Collections.Generic;
 
 namespace logstash4net_cli
 {
@@ -13,18 +13,13 @@ namespace logstash4net_cli
     {
         static void Main(string[] args)
         {
-            List<IInput> inputs = new List<IInput>();
-            inputs.Add(new MongoDbInput("mongodb://localhost:27017", "logstash", "logs2"));
-            inputs.Add(new MongoDbInput("mongodb://localhost:27017", "logstash", "logs3"));
-            inputs.Add(new FileInput(@"D:\logstash\log-file.txt", @"^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}"));
+            BasicConfiguration configuration = new BasicConfiguration()
+                .AddInput("MongoDb", "mongodb://localhost:27017", "logstash", "logs2")
+                .AddInput("MongoDb", "mongodb://localhost:27017", "logstash", "logs2")
+                //.AddInput("File", @"D:\logstash\log-file.txt", @"^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}")
+                .AddOutput("Console");       
 
-            List<IFilter> filters = new List<IFilter>();
-
-            List<IOutput> outputs = new List<IOutput>();
-            outputs.Add(new ConsoleOutput());
-
-
-            using (ILogger logger = new Logger<BasicConfiguration>(inputs, filters, outputs))
+            using (ILogger logger = new Logger<BasicConfiguration>(configuration))
             {
                 logger.Run();
 

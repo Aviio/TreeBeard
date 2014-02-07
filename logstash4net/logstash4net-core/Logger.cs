@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using logstash4net.Configuration;
 using logstash4net.Events;
@@ -7,6 +8,7 @@ using logstash4net.Filters;
 using logstash4net.Inputs;
 using logstash4net.Outputs;
 using logstash4net.Utils;
+using logstash4net.Interfaces;
 
 namespace logstash4net
 {
@@ -16,22 +18,24 @@ namespace logstash4net
         private event OutputEventHandler OutputEvent;
         private delegate void OutputEventHandler(object sender, OutputEventArgs e);
 
-        private readonly List<IInput> _inputs;
-        private readonly List<IFilter> _filters;
-        private readonly List<IOutput> _outputs;
+        private readonly IConfiguration _configuration;
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
         public bool IsRunnable
         {
-            get { return (_inputs != null && _filters != null && _outputs != null && _inputs.Count > 0 && _outputs.Count > 0); }
+            get { return (_configuration != null && _configuration.Inputs != null && _configuration.Filters != null && _configuration.Outputs != null && _configuration.Inputs.Count > 0 && _configuration.Outputs.Count > 0); }
+        }
+
+        public Logger(TConfiguration configuration)
+        {
+            _configuration = configuration;
+
+            ReflectionUtils.LoadReferencedAssemblies();
         }
 
         public Logger(params object[] args)
+            : this(ReflectionUtils.Construct<TConfiguration>(args))
         {
-            IConfiguration configuration = ReflectionUtils.Construct<TConfiguration>(args);
-            _inputs = configuration.Inputs;
-            _filters = configuration.Filters;
-            _outputs = configuration.Outputs;
         }
 
         public void Dispose()
@@ -44,11 +48,12 @@ namespace logstash4net
             if (!IsRunnable) return;
 
             // merge inputs
-            IObservable<IEvent> filterSource = _inputs.Merge();
+            IObservable<IEvent> filterSource = (from input in _configuration.Inputs
+                                               select input.Execute()).Merge();
 
             // subscribe filters
             IObservable<IEvent> outputSource;
-            if (_filters.Count > 0)
+            if (_configuration.Outputs.Count > 0)
             {
                 Subscribe(filterSource, FilterEvent);
                 outputSource = Observable.FromEventPattern<OutputEventHandler, OutputEventArgs>(action => { OutputEvent += action; }, action => { OutputEvent -= action; })
@@ -60,7 +65,7 @@ namespace logstash4net
             }    
             
             // subscribe outputs
-            foreach (IOutput output in _outputs)
+            foreach (IOutput output in _configuration.Outputs)
             {
                 Subscribe(outputSource, output.Execute);
             }
@@ -73,7 +78,7 @@ namespace logstash4net
 
         private void FilterEvent(IEvent value)
         {
-            foreach (IFilter filter in _filters)
+            foreach (IFilter filter in _configuration.Filters)
             {
                 value = filter.Execute(value);
                 if (value == null)

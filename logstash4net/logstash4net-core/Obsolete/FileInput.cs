@@ -1,44 +1,47 @@
-﻿using System;
+﻿using logstash4net.Events;
+using logstash4net.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
-using logstash4net.Events;
 
-namespace logstash4net.Inputs
+namespace logstash4net.Obsolete
 {
-    public class FileInput : IInput
+    internal class FileInput : IInput
     {
-        private readonly string _fileName;
-        private readonly string _timeStampRegEx;
-        private readonly FileSystemWatcher _watcher;
+        private string _fileName;
+        private string _timeStampRegEx;
+        private FileSystemWatcher _watcher;
         private long _position;
 
-        public FileInput(string fullFileName)
+        public IObservable<IEvent> Execute()
         {
-            _fileName = fullFileName;
+            Initialize();
 
-            string directory = Path.GetDirectoryName(fullFileName) ?? string.Empty;
-            string fileName = Path.GetFileName(fullFileName) ?? string.Empty;
+            return Observable.FromEventPattern<FileSystemEventHandler, FileSystemEventArgs>(action => { _watcher.Changed += action; }, action => { _watcher.Changed -= action; })
+                .Throttle(TimeSpan.FromSeconds(1))
+                .SelectMany(SelectLines);
+        }
+
+        public void Initialize(params string[] args)
+        {
+            _fileName = args[0];
+            if (args.Length > 1)
+            {
+                _timeStampRegEx = args[1];
+            }
+        }
+
+        private void Initialize()
+        {
+            string directory = Path.GetDirectoryName(_fileName) ?? string.Empty;
+            string fileName = Path.GetFileName(_fileName) ?? string.Empty;
             _watcher = new FileSystemWatcher(directory, fileName);
             _watcher.NotifyFilter = NotifyFilters.Size;
             _watcher.EnableRaisingEvents = true;
 
             _position = GetEndPosition();
-        }
-
-        public FileInput(string fullFileName, string timeStampRegEx)
-            : this(fullFileName)
-        {
-            _timeStampRegEx = timeStampRegEx;
-        }
-
-        public IDisposable Subscribe(IObserver<IEvent> observer)
-        {
-            return Observable.FromEventPattern<FileSystemEventHandler, FileSystemEventArgs>(action => { _watcher.Changed += action; }, action => { _watcher.Changed -= action; })
-                .Throttle(TimeSpan.FromSeconds(1))      
-                .SelectMany(SelectLines)
-                .Subscribe(observer);
         }
 
         private IEnumerable<IEvent> SelectLines(EventPattern<FileSystemEventArgs> e)
@@ -60,7 +63,7 @@ namespace logstash4net.Inputs
                     }
                     _position = fs.Position;
                 }
-            }         
+            }
         }
 
         private long GetEndPosition()
@@ -70,9 +73,9 @@ namespace logstash4net.Inputs
                 using (StreamReader sr = new StreamReader(fs, true))
                 {
                     sr.ReadToEnd();
-                    return fs.Position; 
+                    return fs.Position;
                 }
-            }       
+            }
         }
     }
 }

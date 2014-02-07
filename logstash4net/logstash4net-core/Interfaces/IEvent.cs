@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace logstash4net.Events
+namespace logstash4net.Interfaces
 {
     public interface IEvent
     {

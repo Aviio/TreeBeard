@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using logstash4net.Filters;
 using logstash4net.Inputs;
 using logstash4net.Outputs;
+using logstash4net.Interfaces;
 
 namespace logstash4net.Configuration
 {

@@ -6,3 +6,4 @@ logstash4net/logstash4net-cli/bin/
 logstash4net/logstash4net-core/obj/
 logstash4net/logstash4net-core/bin/
 logstash4net/packages/
+*.user

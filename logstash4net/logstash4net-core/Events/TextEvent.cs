@@ -1,4 +1,6 @@
-﻿using System;
+﻿using logstash4net.ExtensionMethods;
+using logstash4net.Interfaces;
+using System;
 using System.Text.RegularExpressions;
 
 namespace logstash4net.Events
@@ -7,15 +9,19 @@ namespace logstash4net.Events
     {
         private readonly string _text;
 
-        public TextEvent(string text, string timeStampRegEx)
+        public TextEvent(string text, DateTime timeStamp)
         {
             _text = text;
+            TimeStamp = timeStamp;
+        }
 
-            TimeStamp = GetTimeStamp(text, timeStampRegEx);
+        public TextEvent(string text, string timeStampRegEx)
+            : this(text, text.GetTimeStamp(timeStampRegEx))
+        {
         }
 
         public TextEvent(string text)
-            : this(text, string.Empty)
+            : this(text, DateTime.Now)
         {         
         }
 
@@ -24,24 +30,6 @@ namespace logstash4net.Events
         public string AsString()
         {
             return string.Format("[{0}] {1}", TimeStamp, _text);
-        }
-
-        private DateTime GetTimeStamp(string text, string timeStampRegEx)
-        {  
-            if (!string.IsNullOrEmpty(timeStampRegEx))
-            {
-                Regex regex = new Regex(timeStampRegEx);
-                Match match = regex.Match(text);
-                if (match.Success)
-                {
-                    DateTime timeStamp;
-                    if (DateTime.TryParse(match.Groups[0].Value, out timeStamp))
-                    {
-                        return timeStamp;
-                    }
-                }
-            }
-            return DateTime.Now;
         }
     }
 }

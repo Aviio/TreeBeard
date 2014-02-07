@@ -1,15 +1,15 @@
 ﻿
+using CSScriptLibrary;
+using logstash4net.Interfaces;
 using System;
 using System.Collections.Generic;
-using CSScriptLibrary;
-using logstash4net.Filters;
-using logstash4net.Inputs;
-using logstash4net.Outputs;
+using System.IO;
 
 namespace logstash4net.Utils
 {
-    public static class ScriptUtils
+    internal static class ScriptUtils
     {
+        private readonly static Dictionary<string, Evaluator> Evaluators = new Dictionary<string, Evaluator>();
         private readonly static Dictionary<Type, string> Locations = new Dictionary<Type, string>
             {
                 { typeof(IInput), "Inputs" },
@@ -17,19 +17,44 @@ namespace logstash4net.Utils
                 { typeof(IOutput), "Outputs" }
             };
 
-        public static IOutput ConstructOutput(string name, params object[] args)
+        public static IOutput ConstructOutput(string name, params string[] args)
         {
             return Construct<IOutput>(name, args);
         }
 
-        public static T Construct<T>(string name, params object[] args)
-            where T : class
+        public static IFilter ConstructFilter(string name, params string[] args)
         {
-            T result = CSScript.Evaluator.LoadFile<T>(string.Format(@".\Scripts\{0}\{1}.cs", Locations[typeof(T)], name));
+            return Construct<IFilter>(name, args);
+        }
 
-            // TODO inject args somehow!?!
+        public static IInput ConstructInput(string name, params string[] args)
+        {
+            return Construct<IInput>(name, args);
+        }
+
+        private static T Construct<T>(string name, params string[] args)
+            where T : class, IInitializable
+        {
+            string fileName = string.Format(@".\Scripts\{0}\{1}.csx", Locations[typeof(T)], name);
+            string code = File.ReadAllText(fileName);
+
+            Evaluator evaluator = GetEvaluator(code, fileName);
+
+            T result = evaluator.LoadCode<T>(code);
+
+            result.Initialize(args);
 
             return result;
+        }
+
+        private static Evaluator GetEvaluator(string code, string fileName)
+        {
+            if (!Evaluators.ContainsKey(fileName))
+            {
+                Evaluator evaluator = CSScript.Evaluator.ReferenceAssembliesFromCode(code, Path.GetDirectoryName(fileName));
+                Evaluators.Add(fileName, evaluator);
+            }
+            return Evaluators[fileName];
         }
     }
 }

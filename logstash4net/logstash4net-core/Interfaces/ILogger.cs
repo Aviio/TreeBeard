@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace logstash4net
+namespace logstash4net.Interfaces
 {
     public interface ILogger : IDisposable
     {

@@ -33,12 +33,6 @@
     <Reference Include="CSScriptLibrary">
       <HintPath>..\packages\CS-Script.3.7.0.0\lib\net45\CSScriptLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.CSharp">
       <HintPath>..\packages\CS-Script.3.7.0.0\lib\net45\Mono.CSharp.dll</HintPath>
     </Reference>
@@ -68,25 +62,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\BasicConfiguration.cs" />
-    <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="ExtensionMethods\ArrayExtensions.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Interfaces\IConfiguration.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
-    <Compile Include="Events\BsonEvent.cs" />
     <Compile Include="Events\TextEvent.cs" />
     <Compile Include="Exceptions\TypeConstructionException.cs" />
     <Compile Include="Filters\ConfigurationFilter.cs" />
-    <Compile Include="ILogger.cs" />
+    <Compile Include="Interfaces\IInitializable.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Inputs\ConfigurationInput.cs" />
-    <Compile Include="Inputs\FileInput.cs" />
-    <Compile Include="Inputs\MongoDbInput.cs" />
-    <Compile Include="Obsolete\ConsoleObserver.cs" />
-    <Compile Include="Obsolete\FileObservable.cs" />
-    <Compile Include="Filters\IFilter.cs" />
-    <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Interfaces\IFilter.cs" />
+    <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="OutputEventArgs.cs" />
     <Compile Include="Outputs\ConfigurationOutput.cs" />
-    <Compile Include="Outputs\ConsoleOutput.cs" />
-    <Compile Include="Outputs\IOutput.cs" />
-    <Compile Include="Inputs\IInput.cs" />
+    <Compile Include="Interfaces\IOutput.cs" />
+    <Compile Include="Interfaces\IInput.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
@@ -95,13 +86,27 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <Content Include="Scripts\OUtputs\ConsoleOutputScript.cs">
+    <Content Include="Scripts\Inputs\File.csx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Inputs\MongoDB.Bson.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Inputs\MongoDb.csx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Inputs\MongoDB.Driver.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Inputs\System.Reactive.Core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Outputs\Console.csx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\Filters\" />
-    <Folder Include="Scripts\Inputs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
