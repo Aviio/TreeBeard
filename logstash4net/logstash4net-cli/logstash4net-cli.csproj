@@ -48,9 +48,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\logstash4net\logstash4net.csproj">
+    <ProjectReference Include="..\logstash4net-core\logstash4net-core.csproj">
       <Project>{5cecc83f-bd75-455e-9440-2cfee58edf8e}</Project>
-      <Name>logstash4net</Name>
+      <Name>logstash4net-core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,6 @@ logstash4net/logstash4net/Scripting.cs
 logstash4net/logstash4net.v12.suo
 logstash4net/logstash4net-cli/obj/
 logstash4net/logstash4net-cli/bin/
-logstash4net/logstash4net/obj/
-logstash4net/logstash4net/bin/
+logstash4net/logstash4net-core/obj/
+logstash4net/logstash4net-core/bin/
 logstash4net/packages/
