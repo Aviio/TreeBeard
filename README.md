@@ -5,14 +5,7 @@ logstash-a-like written in C#
 
 Currently available scripts:
 
-Inputs
-============
-MongoDb
-File (broken!)
-
-Filters
-============
-
-Outputs
-============
-Console
+| Inputs | Filters | Outputs |
+|--------|---------|---------|
+| MongoDb | | Console |
+| File (broken!) | | |
