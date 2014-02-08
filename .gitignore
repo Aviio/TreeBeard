@@ -1,9 +1,9 @@
-logstash4net/logstash4net.v11.suo
-logstash4net/logstash4net/Scripting.cs
-logstash4net/logstash4net.v12.suo
-logstash4net/logstash4net-cli/obj/
-logstash4net/logstash4net-cli/bin/
-logstash4net/logstash4net-core/obj/
-logstash4net/logstash4net-core/bin/
-logstash4net/packages/
+TreeBeard/TreeBeard.v11.suo
+TreeBeard/TreeBeard/Scripting.cs
+TreeBeard/TreeBeard.v12.suo
+TreeBeard/TreeBeard-cli/obj/
+TreeBeard/TreeBeard-cli/bin/
+TreeBeard/TreeBeard/obj/
+TreeBeard/TreeBeard/bin/
+TreeBeard/packages/
 *.user
