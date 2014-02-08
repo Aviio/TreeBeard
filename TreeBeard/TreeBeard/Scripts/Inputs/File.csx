@@ -1,19 +1,20 @@
-﻿using logstash4net.Events;
-using logstash4net.Interfaces;
+﻿using TreeBeard.Events;
+using TreeBeard.Inputs;
+using TreeBeard.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
 
-public class FileInput : IInput
+public class FileInput : AbstractInput
 {
     private string _fileName;
     private string _timeStampRegEx;
     private FileSystemWatcher _watcher;
     private long _position;
 
-    public IObservable<IEvent> Execute()
+    public override IObservable<IEvent> Execute()
     {
         Initialize();
 
@@ -22,7 +23,7 @@ public class FileInput : IInput
             .SelectMany(SelectLines);
     }
 
-    public void Initialize(params string[] args)
+    public override void Initialize(params string[] args)
     {
         _fileName = args[0];
         if (args.Length > 1)
@@ -57,7 +58,7 @@ public class FileInput : IInput
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    yield return new TextEvent(line, _timeStampRegEx);
+                    yield return new Event(Source, line, _timeStampRegEx);
                 }
                 _position = fs.Position;
             }

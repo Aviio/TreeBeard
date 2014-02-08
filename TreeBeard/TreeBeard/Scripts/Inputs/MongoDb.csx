@@ -1,7 +1,8 @@
 ﻿//css_reference MongoDB.Bson.dll;
 //css_reference MongoDB.Driver.dll;
-using logstash4net.Events;
-using logstash4net.Interfaces;
+using TreeBeard.Events;
+using TreeBeard.Inputs;
+using TreeBeard.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 
-public class MongoDbInput : IInput
+public class MongoDbInput : AbstractInput
 {
     private string _uri;
     private string _database;
@@ -20,12 +21,12 @@ public class MongoDbInput : IInput
     private MongoCollection<BsonDocument> _mongoCollection;
     private BsonValue _lastId;
 
-    public IObservable<IEvent> Execute()
+    public override IObservable<IEvent> Execute()
     {
         return Observable.Interval(TimeSpan.FromSeconds(1)).SelectMany(_ => GetEvents());
     }
 
-    public void Initialize(params string[] args)
+    public override void Initialize(params string[] args)
     {
         _uri = args[0];
         _database = args[1];
@@ -46,7 +47,7 @@ public class MongoDbInput : IInput
         var query = Query.GT("_id", _lastId);
         foreach (var document in _mongoCollection.Find(query).SetSortOrder("$natural"))
         {
-            yield return new BsonEvent(document);
+            yield return new BsonEvent(Source, document);
             _lastId = document["_id"];
         }
     }
@@ -69,23 +70,20 @@ public class MongoDbInput : IInput
         return (lastRecord != null) ? lastRecord["_id"] : BsonMinKey.Value;
     }
 
-    private class BsonEvent : IEvent
+    private class BsonEvent : Event
     {
         private readonly BsonDocument _document;
 
-        public BsonEvent(BsonDocument document)
+        public BsonEvent(string source, BsonDocument document)
+            : base(source, document.ToJson(), GetTimeStamp(document))
         {
             _document = document;
-
-            var objectId = _document["_id"] as BsonObjectId;
-            TimeStamp = (objectId != null) ? objectId.Value.CreationTime : DateTime.Now;
         }
 
-        public DateTime TimeStamp { get; private set; }
-
-        public string AsString()
-        {
-            return string.Format("[{0}] {1}", TimeStamp, _document.ToJson());
+        private static DateTime GetTimeStamp(BsonDocument document)
+        {     
+            var objectId = document["_id"] as BsonObjectId;
+            return (objectId != null) ? objectId.Value.CreationTime : DateTime.Now;
         }
     }
 }

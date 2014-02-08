@@ -64,9 +64,10 @@
     <Compile Include="Configuration\BasicConfiguration.cs" />
     <Compile Include="ExtensionMethods\ArrayExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Inputs\AbstractInput.cs" />
     <Compile Include="Interfaces\IConfiguration.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
-    <Compile Include="Events\TextEvent.cs" />
+    <Compile Include="Events\Event.cs" />
     <Compile Include="Exceptions\TypeConstructionException.cs" />
     <Compile Include="Filters\ConfigurationFilter.cs" />
     <Compile Include="Interfaces\IInitializable.cs" />

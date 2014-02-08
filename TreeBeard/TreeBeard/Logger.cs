@@ -21,7 +21,7 @@ namespace TreeBeard
         private readonly IConfiguration _configuration;
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
-        public bool IsRunnable
+        public bool IsExecutable
         {
             get { return (_configuration != null && _configuration.Inputs != null && _configuration.Filters != null && _configuration.Outputs != null && _configuration.Inputs.Count > 0 && _configuration.Outputs.Count > 0); }
         }
@@ -43,9 +43,9 @@ namespace TreeBeard
             _subscriptions.ForEach(s => { if (s != null) s.Dispose(); });
         }
 
-        public void Run()
+        public void Execute()
         {
-            if (!IsRunnable) return;
+            if (!IsExecutable) return;
 
             // merge inputs
             IObservable<IEvent> filterSource = (from input in _configuration.Inputs

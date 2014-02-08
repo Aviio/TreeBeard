@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using TreeBeard.Filters;
 using TreeBeard.Inputs;
-using TreeBeard.Outputs;
 using TreeBeard.Interfaces;
+using TreeBeard.Outputs;
 
 namespace TreeBeard.Configuration
 {

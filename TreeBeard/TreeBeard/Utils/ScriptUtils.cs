@@ -1,9 +1,9 @@
 ﻿
 using CSScriptLibrary;
-using TreeBeard.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TreeBeard.Interfaces;
 
 namespace TreeBeard.Utils
 {
@@ -29,7 +29,10 @@ namespace TreeBeard.Utils
 
         public static IInput ConstructInput(string name, params string[] args)
         {
-            return Construct<IInput>(name, args);
+            IInput input = Construct<IInput>(name.Split(':')[0], args);
+            input.SetSource(name);
+
+            return input;
         }
 
         private static T Construct<T>(string name, params string[] args)

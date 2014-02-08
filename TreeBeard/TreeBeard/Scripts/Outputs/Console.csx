@@ -1,5 +1,5 @@
 ﻿using System;
-using logstash4net.Interfaces;
+using TreeBeard.Interfaces;
 
 public class ConsoleOutput : IOutput
 {
