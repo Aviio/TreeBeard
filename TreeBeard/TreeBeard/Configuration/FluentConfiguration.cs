@@ -7,13 +7,13 @@ using TreeBeard.Outputs;
 
 namespace TreeBeard.Configuration
 {
-    public class BasicConfiguration : IConfiguration
+    public class FluentConfiguration : IConfiguration
     {
         public List<IInput> Inputs { get; set; }
         public List<IFilter> Filters { get; set; }
         public List<IOutput> Outputs { get; set; }
 
-        public BasicConfiguration()
+        public FluentConfiguration()
         {
             Inputs = new List<IInput>();
             Filters = new List<IFilter>();
@@ -23,7 +23,7 @@ namespace TreeBeard.Configuration
 
     public static class BasicConfigurationExtensions
     {
-        public static BasicConfiguration AddInput(this BasicConfiguration configuration, params string[] args)
+        public static FluentConfiguration AddInput(this FluentConfiguration configuration, params string[] args)
         {
             ConfigurationInput input = new ConfigurationInput();
             input.Initialize(args);
@@ -32,7 +32,7 @@ namespace TreeBeard.Configuration
             return configuration;
         }
 
-        public static BasicConfiguration AddFilter(this BasicConfiguration configuration, params string[] args)
+        public static FluentConfiguration AddFilter(this FluentConfiguration configuration, params string[] args)
         {
             ConfigurationFilter filter = new ConfigurationFilter();
             filter.Initialize(args);
@@ -41,7 +41,7 @@ namespace TreeBeard.Configuration
             return configuration;
         }
 
-        public static BasicConfiguration AddOutput(this BasicConfiguration configuration, params string[] args)
+        public static FluentConfiguration AddOutput(this FluentConfiguration configuration, params string[] args)
         {
             ConfigurationOutput output = new ConfigurationOutput();
             output.Initialize(args);

@@ -25,6 +25,16 @@ namespace TreeBeard.Utils
             return result;
         }
 
+        public static object Construct(Type type, params object[] args)
+        {
+            object result = Activator.CreateInstance(type, args);
+            if (result == null)
+            {
+                throw new TypeConstructionException(type);
+            }
+            return result;
+        }
+
         //public static void LoadReferencedAssemblies()
         //{
         //    var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();

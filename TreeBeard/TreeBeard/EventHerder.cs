@@ -12,9 +12,9 @@ using TreeBeard.Interfaces;
 
 namespace TreeBeard
 {
-    //public class Logger<TConfiguration> : ILogger
+    //public class EventHerder<TConfiguration> : IEventHerder
     //    where TConfiguration : class, IConfiguration
-    public class Logger : ILogger
+    public class EventHerder : IEventHerder
     {
         private event OutputEventHandler OutputEvent;
         private delegate void OutputEventHandler(object sender, OutputEventArgs e);
@@ -27,12 +27,17 @@ namespace TreeBeard
             get { return (_configuration != null && _configuration.Inputs != null && _configuration.Filters != null && _configuration.Outputs != null && _configuration.Inputs.Count > 0 && _configuration.Outputs.Count > 0); }
         }
 
-        public Logger(IConfiguration configuration)
+        public EventHerder(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        //public Logger(params object[] args)
+        public EventHerder(Type configurationType, params object[] args)
+            : this(ReflectionUtils.Construct(configurationType, args) as IConfiguration)
+        {
+        }
+
+        //public EventHerder(params object[] args)
         //    : this(ReflectionUtils.Construct<TConfiguration>(args))
         //{
         //}

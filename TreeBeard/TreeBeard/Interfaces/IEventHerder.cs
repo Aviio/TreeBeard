@@ -2,7 +2,7 @@
 
 namespace TreeBeard.Interfaces
 {
-    public interface ILogger : IDisposable
+    public interface IEventHerder : IDisposable
     {
         void Execute();
     }

@@ -21,15 +21,15 @@ namespace TreeBeard_cli
             else
             {
                 // FOR LOCAL TESTING PURPOSES
-                configuration = new BasicConfiguration()
+                configuration = new FluentConfiguration()
                     .AddInput("MongoDb:logs2", "mongodb://localhost:27017", "logstash", "logs2")
                     .AddInput("MongoDb:logs3", "mongodb://localhost:27017", "logstash", "logs3")
                     .AddInput("File", @"D:\log-file.txt", @"^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}")
                     .AddOutput("Console");
             }
-            using (ILogger logger = new Logger(configuration))
+            using (IEventHerder eventHerder = new EventHerder(configuration))
             {
-                logger.Execute();
+                eventHerder.Execute();
 
                 Console.WriteLine("Press ENTER to exit...");
                 Console.ReadLine();
