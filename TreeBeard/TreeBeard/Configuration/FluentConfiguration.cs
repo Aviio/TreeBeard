@@ -21,7 +21,7 @@ namespace TreeBeard.Configuration
         }
     }
 
-    public static class BasicConfigurationExtensions
+    public static class FluentConfigurationExtensions
     {
         public static FluentConfiguration AddInput(this FluentConfiguration configuration, params string[] args)
         {
