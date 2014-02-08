@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Configuration\example.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TreeBeard\TreeBeard.csproj">

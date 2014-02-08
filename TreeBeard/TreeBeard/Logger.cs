@@ -12,8 +12,9 @@ using TreeBeard.Interfaces;
 
 namespace TreeBeard
 {
-    public class Logger<TConfiguration> : ILogger
-        where TConfiguration : class, IConfiguration
+    //public class Logger<TConfiguration> : ILogger
+    //    where TConfiguration : class, IConfiguration
+    public class Logger : ILogger
     {
         private event OutputEventHandler OutputEvent;
         private delegate void OutputEventHandler(object sender, OutputEventArgs e);
@@ -26,17 +27,15 @@ namespace TreeBeard
             get { return (_configuration != null && _configuration.Inputs != null && _configuration.Filters != null && _configuration.Outputs != null && _configuration.Inputs.Count > 0 && _configuration.Outputs.Count > 0); }
         }
 
-        public Logger(TConfiguration configuration)
+        public Logger(IConfiguration configuration)
         {
             _configuration = configuration;
-
-            System.Reactive.EventPattern<TConfiguration> t;
         }
 
-        public Logger(params object[] args)
-            : this(ReflectionUtils.Construct<TConfiguration>(args))
-        {
-        }
+        //public Logger(params object[] args)
+        //    : this(ReflectionUtils.Construct<TConfiguration>(args))
+        //{
+        //}
 
         public void Dispose()
         {

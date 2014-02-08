@@ -3,18 +3,20 @@ using CSScriptLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Reflection;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Utils
 {
     internal static class ScriptUtils
     {
-        private readonly static Dictionary<string, Evaluator> Evaluators = new Dictionary<string, Evaluator>();
-        private readonly static Dictionary<Type, string> Locations = new Dictionary<Type, string>
+        private readonly static Dictionary<Type, string> TypeDescriptions = new Dictionary<Type, string>
             {
-                { typeof(IInput), "Inputs" },
-                { typeof(IFilter), "Filters" },
-                { typeof(IOutput), "Outputs" }
+                { typeof(IInput), "Input" },
+                { typeof(IFilter), "Filter" },
+                { typeof(IOutput), "Output" }
             };
 
         public static IOutput ConstructOutput(string name, params string[] args)
@@ -38,26 +40,28 @@ namespace TreeBeard.Utils
         private static T Construct<T>(string name, params string[] args)
             where T : class, IInitializable
         {
-            string fileName = string.Format(@".\Scripts\{0}\{1}.csx", Locations[typeof(T)], name);
-            string code = File.ReadAllText(fileName);
+            string typeDesciption = TypeDescriptions[typeof(T)];
 
-            Evaluator evaluator = GetEvaluator(code, fileName);
+            string fileName = string.Format(@".\Scripts\{0}s\{1}.csx", typeDesciption, name);
+            string typeName = name + typeDesciption;
 
-            T result = evaluator.LoadCode<T>(code);
+            T result = ConstructFromScript<T>(fileName, typeName);
 
             result.Initialize(args);
 
             return result;
         }
 
-        private static Evaluator GetEvaluator(string code, string fileName)
+        private static T ConstructFromScript<T>(string fileName, string typeName)
+            where T : class
         {
-            if (!Evaluators.ContainsKey(fileName))
-            {
-                Evaluator evaluator = CSScript.Evaluator.ReferenceAssembliesFromCode(code, Path.GetDirectoryName(fileName));
-                Evaluators.Add(fileName, evaluator);
-            }
-            return Evaluators[fileName];
+            string code = File.ReadAllText(fileName);
+            
+            T result = CSScript.LoadCode(code).CreateObject(typeName).AlignToInterface<T>();
+
+            return result;
         }
+
+        
     }
 }

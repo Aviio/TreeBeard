@@ -90,13 +90,13 @@
     <Content Include="Scripts\Inputs\File.csx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Inputs\MongoDB.Bson.dll">
+    <Content Include="MongoDB.Bson.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Inputs\MongoDb.csx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Inputs\MongoDB.Driver.dll">
+    <Content Include="MongoDB.Driver.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Outputs\Console.csx">
