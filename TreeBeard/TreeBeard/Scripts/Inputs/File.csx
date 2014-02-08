@@ -11,7 +11,6 @@ using System.Reactive.Linq;
 public class FileInput : AbstractInput
 {
     private string _fileName;
-    private string _timeStampRegEx;
     private FileSystemWatcher _watcher;
     private long _position;
 
@@ -27,10 +26,6 @@ public class FileInput : AbstractInput
     public override void Initialize(params string[] args)
     {
         _fileName = args[0];
-        if (args.Length > 1)
-        {
-            _timeStampRegEx = args[1];
-        }
     }
 
     private void Initialize()
@@ -59,7 +54,7 @@ public class FileInput : AbstractInput
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    yield return new Event(Source, line, _timeStampRegEx);
+                    yield return new Event(Source, line);
                 }
                 _position = fs.Position;
             }

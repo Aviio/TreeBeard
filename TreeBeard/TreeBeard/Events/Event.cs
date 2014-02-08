@@ -1,7 +1,5 @@
-﻿using TreeBeard.ExtensionMethods;
+﻿using System;
 using TreeBeard.Interfaces;
-using System;
-using System.Text.RegularExpressions;
 
 namespace TreeBeard.Events
 {
@@ -14,19 +12,14 @@ namespace TreeBeard.Events
             TimeStamp = timeStamp;
         }
 
-        public Event(string source, string message, string timeStampRegEx)
-            : this(source, message, message.GetTimeStamp(timeStampRegEx))
-        {
-        }
-
         public Event(string source, string message)
             : this(source, message, DateTime.Now)
         {         
         }
 
-        public string Source { get; private set; }
-        public string Message { get; private set; }
-        public DateTime TimeStamp { get; private set; }
+        public string Source { get; set; }
+        public string Message { get; set; }
+        public DateTime TimeStamp { get; set; }
 
         public virtual string AsString()
         {

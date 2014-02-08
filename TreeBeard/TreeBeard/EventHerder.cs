@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using TreeBeard.Configuration;
-using TreeBeard.Events;
-using TreeBeard.Filters;
-using TreeBeard.Inputs;
-using TreeBeard.Outputs;
-using TreeBeard.Utils;
 using TreeBeard.Interfaces;
+using TreeBeard.Utils;
 
 namespace TreeBeard
 {
@@ -57,7 +52,7 @@ namespace TreeBeard
 
             // subscribe filters
             IObservable<IEvent> outputSource;
-            if (_configuration.Outputs.Count > 0)
+            if (_configuration.Filters.Count > 0)
             {
                 Subscribe(filterSource, FilterEvent);
                 outputSource = Observable.FromEventPattern<OutputEventHandler, OutputEventArgs>(action => { OutputEvent += action; }, action => { OutputEvent -= action; })
@@ -84,10 +79,13 @@ namespace TreeBeard
         {
             foreach (IFilter filter in _configuration.Filters)
             {
-                value = filter.Execute(value);
-                if (value == null)
+                if ((filter.Predicate != null) ? filter.Predicate(value) : true)
                 {
-                    return;
+                    value = filter.Execute(value);
+                    if (value == null)
+                    {
+                        return;
+                    }
                 }
             }
             OutputEvent(this, new OutputEventArgs(value));

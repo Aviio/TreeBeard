@@ -3,9 +3,7 @@ using CSScriptLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reactive;
-using System.Reactive.Linq;
-using System.Reflection;
+using TreeBeard.ExtensionMethods;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Utils
@@ -24,15 +22,18 @@ namespace TreeBeard.Utils
             return Construct<IOutput>(name, args);
         }
 
-        public static IFilter ConstructFilter(string name, params string[] args)
+        public static IFilter ConstructFilter(string name, string predicate, params string[] args)
         {
-            return Construct<IFilter>(name, args);
+            IFilter filter = Construct<IFilter>(name, args);
+            filter.Predicate = predicate.GetFunc<IEvent, bool>();
+
+            return filter;
         }
 
         public static IInput ConstructInput(string name, params string[] args)
         {
             IInput input = Construct<IInput>(name.Split(':')[0], args);
-            input.SetSource(name);
+            input.Source = name;
 
             return input;
         }

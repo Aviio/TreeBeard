@@ -24,7 +24,9 @@ namespace TreeBeard_cli
                 configuration = new FluentConfiguration()
                     .AddInput("MongoDb:logs2", "mongodb://localhost:27017", "logstash", "logs2")
                     .AddInput("MongoDb:logs3", "mongodb://localhost:27017", "logstash", "logs3")
-                    .AddInput("File", @"D:\log-file.txt", @"^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}")
+                    .AddInput("File:1", @"D:\log-file.txt")
+                    .AddInput("File:2", @"D:\log-file.txt")
+                    .AddFilter("RegExTimeStamp", "Source==\"File:2\"", @"^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}")
                     .AddOutput("Console");
             }
             using (IEventHerder eventHerder = new EventHerder(configuration))

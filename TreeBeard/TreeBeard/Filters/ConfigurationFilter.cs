@@ -1,23 +1,30 @@
 ﻿using System;
-using TreeBeard.Events;
 using TreeBeard.ExtensionMethods;
-using TreeBeard.Utils;
 using TreeBeard.Interfaces;
+using TreeBeard.Utils;
 
 namespace TreeBeard.Filters
 {
-    internal class ConfigurationFilter :IFilter
+    internal class ConfigurationFilter : AbstractFilter
     {
         private IFilter _filter;
 
-        public IEvent Execute(IEvent value)
+        public override Func<IEvent, bool> Predicate
+        {
+            get { 
+                return (_filter != null) ? _filter.Predicate : null; 
+            }
+            set { }
+        }
+
+        public override IEvent Execute(IEvent value)
         {
             return _filter.Execute(value);
         }
 
-        public void Initialize(params string[] args)
+        public override void Initialize(params string[] args)
         {
-            _filter = ScriptUtils.ConstructFilter(args[0], args.SubArray(1));
+            _filter = ScriptUtils.ConstructFilter(args[0], args[1], args.SubArray(2));
         }
     }
 }

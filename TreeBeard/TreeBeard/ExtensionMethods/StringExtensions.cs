@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TreeBeard.ExtensionMethods
 {
     public static class StringExtensions
     {
-        public static DateTime GetTimeStamp(this string text, string regEx)
+        public static DateTime? GetTimeStamp(this string text, string regEx)
         {
             if (!string.IsNullOrEmpty(regEx))
             {
@@ -24,7 +21,25 @@ namespace TreeBeard.ExtensionMethods
                     }
                 }
             }
-            return DateTime.Now;
+            return null;
+        }
+
+        public static Func<TInput, TOutput> GetFunc<TInput, TOutput>(this string predicate)
+        {
+            if (string.IsNullOrWhiteSpace(predicate)) return null;
+            try
+            {
+                LambdaExpression expression = TreeBeard.Utils.DynamicLinq.DynamicExpression.ParseLambda(typeof(TInput), typeof(TOutput), predicate);
+
+                Func<TInput, TOutput> func = x => (TOutput)expression.Compile().DynamicInvoke(x);
+
+                return func;
+            }
+            catch (Exception)
+            {
+                // TODO log/throw exception?
+                return null;
+            }
         }
     }
 }

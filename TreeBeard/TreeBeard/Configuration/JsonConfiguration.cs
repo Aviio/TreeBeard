@@ -14,7 +14,7 @@ namespace TreeBeard.Configuration
     {
         public List<IInput> Inputs { get; private set; }
         public List<IFilter> Filters { get; private set; }
-        public List<IOutput> Outputs { get; private set; } 
+        public List<IOutput> Outputs { get; private set; }
 
         public JsonConfiguration(string fileName)
         {
@@ -22,44 +22,61 @@ namespace TreeBeard.Configuration
             Filters = new List<IFilter>();
             Outputs = new List<IOutput>();
 
-            using (StreamReader sr = new StreamReader(fileName))
-            {
-                string json = sr.ReadToEnd();
-                dynamic config = JsonConvert.DeserializeObject(json);
+            string json = File.ReadAllText(fileName);
+            dynamic config = JsonConvert.DeserializeObject(json);
 
-                foreach (dynamic input in config.inputs)
-                {
-                    AddInput(input.Name, input.Value);
-                }
-                foreach (dynamic filter in config.filters)
-                {
-                    AddFilter(filter.Name, filter.Value);
-                }
-                foreach (dynamic output in config.outputs)
-                {
-                    AddOutput(output.Name, output.Value);
-                }
+            foreach (dynamic input in config.inputs)
+            {
+                AddInput(input);
+            }
+            foreach (dynamic filter in config.filters)
+            {
+                AddFilter(filter);
+            }
+            foreach (dynamic output in config.outputs)
+            {
+                AddOutput(output);
             }
         }
 
-        private void AddInput(string name, dynamic args)
+        private void AddInput(dynamic value)
         {
             ConfigurationInput input = new ConfigurationInput();
-            input.Initialize(GetArgs(name, args));
+
+            string name = value.type;
+            if (value.id != null)
+            {
+                name += ":" + value.id;
+            }
+
+            input.Initialize(GetArgs(name, value.args));
             Inputs.Add(input);
         }
 
-        private void AddFilter(string name, dynamic args)
+        private void AddFilter(dynamic value)
         {
             ConfigurationFilter filter = new ConfigurationFilter();
-            filter.Initialize(GetArgs(name, args));
+
+            List<string> argsList = new List<string>();
+            argsList.Add((string)value.type);
+            argsList.Add((string)(value.predicate ?? string.Empty));
+            if (value.args != null)
+            {
+                foreach (string item in value.args)
+                {
+                    argsList.Add(item);
+                }
+            }
+
+            filter.Initialize(argsList.ToArray());
             Filters.Add(filter);
         }
 
-        private void AddOutput(string name, dynamic args)
+        private void AddOutput(dynamic value)
         {
             ConfigurationOutput output = new ConfigurationOutput();
-            output.Initialize(GetArgs(name, args));
+
+            output.Initialize(GetArgs((string)value.type, value.args));
             Outputs.Add(output);
         }
 
@@ -67,9 +84,12 @@ namespace TreeBeard.Configuration
         {
             List<string> argsList = new List<string>();
             argsList.Add(name);
-            foreach (string value in args)
+            if (args != null)
             {
-                argsList.Add(value);
+                foreach (string value in args)
+                {
+                    argsList.Add(value);
+                }
             }
             return argsList.ToArray();
         }

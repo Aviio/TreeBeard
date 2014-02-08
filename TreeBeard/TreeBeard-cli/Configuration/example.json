@@ -1,12 +1,14 @@
 ﻿{
-	inputs : {
-		"MongoDb" : [ "mongodb://localhost:27017", "database", "collection1" ],
-		"MongoDb:c2" : [ "mongodb://localhost:27017", "database", "collection2" ],
-		"File" : [ "C:\\log.txt", "^[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}" ]
-	},
-	filters : {
-	},
-	outputs : {
-		"Console" : []
-	}
+	inputs : [
+		{ type : "MongoDb", args : [ "mongodb://localhost:27017", "database", "collection1" ] },
+		{ type : "MongoDb", id : "c2", args : [ "mongodb://localhost:27017", "database", "collection2" ] },
+		{ type : "File", args : [ "C:\\log.txt" ] },
+		{ type : "File", id : "2", args : [ "C:\\log.txt" ] }
+	],
+	filters : [
+		{ type : "RegExTimeStamp", predicate : "Source==\"File:2\"", args : [ "^[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}" ] }
+	],
+	outputs : [
+		{ type : "Console", args : [] }
+	]
 }
