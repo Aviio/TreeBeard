@@ -1,4 +1,4 @@
-logstash4net
+TreeBeard
 ============
 
 logstash-a-like written in C#
