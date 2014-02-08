@@ -30,7 +30,7 @@ namespace logstash4net
         {
             _configuration = configuration;
 
-            ReflectionUtils.LoadReferencedAssemblies();
+            System.Reactive.EventPattern<TConfiguration> t;
         }
 
         public Logger(params object[] args)

@@ -1,7 +1,7 @@
 ﻿using System;
 using logstash4net.Interfaces;
 
-public class Console : IOutput
+public class ConsoleOutput : IOutput
 {
     public void Execute(IEvent value)
     {
