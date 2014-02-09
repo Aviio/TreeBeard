@@ -5,5 +5,7 @@ TreeBeard/TreeBeard-cli/obj/
 TreeBeard/TreeBeard-cli/bin/
 TreeBeard/TreeBeard/obj/
 TreeBeard/TreeBeard/bin/
+TreeBeard/System.Linq.Dynamic/obj/
+TreeBeard/System.Linq.Dynamic/bin/
 TreeBeard/packages/
 *.user

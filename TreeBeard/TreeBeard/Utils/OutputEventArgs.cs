@@ -2,7 +2,7 @@
 using TreeBeard.Events;
 using TreeBeard.Interfaces;
 
-namespace TreeBeard
+namespace TreeBeard.Utils
 {
     internal class OutputEventArgs : EventArgs
     {

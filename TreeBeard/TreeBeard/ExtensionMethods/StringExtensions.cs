@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
@@ -29,7 +30,7 @@ namespace TreeBeard.ExtensionMethods
             if (string.IsNullOrWhiteSpace(predicate)) return null;
             try
             {
-                LambdaExpression expression = TreeBeard.Utils.DynamicLinq.DynamicExpression.ParseLambda(typeof(TInput), typeof(TOutput), predicate);
+                LambdaExpression expression = System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(TInput), typeof(TOutput), predicate);
 
                 Func<TInput, TOutput> func = x => (TOutput)expression.Compile().DynamicInvoke(x);
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeBeard-cli", "TreeBeard-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeBeard", "TreeBeard\TreeBeard.csproj", "{5CECC83F-BD75-455E-9440-2CFEE58EDF8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Linq.Dynamic", "System.Linq.Dynamic\System.Linq.Dynamic.csproj", "{D1C9B6AC-35CB-463F-99C5-8033CCD549FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5CECC83F-BD75-455E-9440-2CFEE58EDF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CECC83F-BD75-455E-9440-2CFEE58EDF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CECC83F-BD75-455E-9440-2CFEE58EDF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1C9B6AC-35CB-463F-99C5-8033CCD549FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1C9B6AC-35CB-463F-99C5-8033CCD549FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1C9B6AC-35CB-463F-99C5-8033CCD549FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1C9B6AC-35CB-463F-99C5-8033CCD549FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
