@@ -1,8 +1,12 @@
 TreeBeard/TreeBeard.v11.suo
 TreeBeard/TreeBeard/Scripting.cs
 TreeBeard/TreeBeard.v12.suo
-TreeBeard/TreeBeard-cli/obj/
-TreeBeard/TreeBeard-cli/bin/
+TreeBeard/TreeBeard.Cli/obj/
+TreeBeard/TreeBeard.Cli/bin/
+TreeBeard/TreeBeard.Gui/obj/
+TreeBeard/TreeBeard.Gui/bin/
+TreeBeard/TreeBeard.Tests/obj/
+TreeBeard/TreeBeard.Tests/bin/
 TreeBeard/TreeBeard/obj/
 TreeBeard/TreeBeard/bin/
 TreeBeard/System.Linq.Dynamic/obj/

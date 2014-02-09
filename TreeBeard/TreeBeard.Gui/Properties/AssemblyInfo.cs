@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("System.Linq.Dynamic")]
+[assembly: AssemblyTitle("TreeBeard.Gui")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("System.Linq.Dynamic")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
+[assembly: AssemblyCompany("RJC")]
+[assembly: AssemblyProduct("TreeBeard.Gui")]
+[assembly: AssemblyCopyright("Copyright © RJC 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0136d056-71cb-4377-adfc-3147a14f3ab0")]
+[assembly: Guid("521395b9-6ac9-4cc4-a81b-4757121de08f")]
 
 // Version information for an assembly consists of the following four values:
 //

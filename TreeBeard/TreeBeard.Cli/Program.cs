@@ -7,7 +7,7 @@ using TreeBeard.Outputs;
 using System;
 using System.Collections.Generic;
 
-namespace TreeBeard_cli
+namespace TreeBeard.Cli
 {
     class Program
     {
