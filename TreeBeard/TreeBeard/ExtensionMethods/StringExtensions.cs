@@ -28,19 +28,12 @@ namespace TreeBeard.ExtensionMethods
         public static Func<TInput, TOutput> GetFunc<TInput, TOutput>(this string predicate)
         {
             if (string.IsNullOrWhiteSpace(predicate)) return null;
-            try
-            {
-                LambdaExpression expression = System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(TInput), typeof(TOutput), predicate);
 
-                Func<TInput, TOutput> func = x => (TOutput)expression.Compile().DynamicInvoke(x);
+            LambdaExpression expression = System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(TInput), typeof(TOutput), predicate);
 
-                return func;
-            }
-            catch (Exception)
-            {
-                // TODO log/throw exception?
-                return null;
-            }
+            Func<TInput, TOutput> func = x => (TOutput)expression.Compile().DynamicInvoke(x);
+
+            return func;
         }
     }
 }

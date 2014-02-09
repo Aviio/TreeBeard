@@ -43,13 +43,7 @@ namespace TreeBeard.Configuration
         {
             ConfigurationInput input = new ConfigurationInput();
 
-            string name = value.type;
-            if (value.id != null)
-            {
-                name += ":" + value.id;
-            }
-
-            input.Initialize(GetArgs(name, value.args));
+            input.Initialize(GetArgs((string)value.type, (string)(value.id ?? string.Empty), value.args));
             Inputs.Add(input);
         }
 
@@ -57,18 +51,7 @@ namespace TreeBeard.Configuration
         {
             ConfigurationFilter filter = new ConfigurationFilter();
 
-            List<string> argsList = new List<string>();
-            argsList.Add((string)value.type);
-            argsList.Add((string)(value.predicate ?? string.Empty));
-            if (value.args != null)
-            {
-                foreach (string item in value.args)
-                {
-                    argsList.Add(item);
-                }
-            }
-
-            filter.Initialize(argsList.ToArray());
+            filter.Initialize(GetArgs((string)value.type, (string)(value.predicate ?? string.Empty), value.args));
             Filters.Add(filter);
         }
 
@@ -80,10 +63,25 @@ namespace TreeBeard.Configuration
             Outputs.Add(output);
         }
 
-        private string[] GetArgs(string name, dynamic args)
+        private string[] GetArgs(string v1, dynamic args)
         {
             List<string> argsList = new List<string>();
-            argsList.Add(name);
+            argsList.Add(v1);
+            if (args != null)
+            {
+                foreach (string value in args)
+                {
+                    argsList.Add(value);
+                }
+            }
+            return argsList.ToArray();
+        }
+
+        private string[] GetArgs(string v1, string v2, dynamic args)
+        {
+            List<string> argsList = new List<string>();
+            argsList.Add(v1);
+            argsList.Add(v2);
             if (args != null)
             {
                 foreach (string value in args)

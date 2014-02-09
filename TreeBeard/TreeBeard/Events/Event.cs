@@ -5,25 +5,29 @@ namespace TreeBeard.Events
 {
     public class Event : IEvent
     {
-        public Event(string source, string message, DateTime timeStamp)
+        public Event(string type, string id, string message, DateTime timeStamp)
         {
-            Source = source;
+            Type = type;
+            Id = id;
             Message = message;
             TimeStamp = timeStamp;
         }
 
-        public Event(string source, string message)
-            : this(source, message, DateTime.Now)
+        public Event(string type, string id, string message)
+            : this(type, id, message, DateTime.Now)
         {         
         }
 
-        public string Source { get; set; }
+        public string Type { get; set; }
+        public string Id { get; set; }
         public string Message { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public virtual string AsString()
         {
-            return string.Format("[{0}] [{1}] {2}", TimeStamp, Source, Message);
+            string source = Type;
+            if (!string.IsNullOrEmpty(Id)) source += ":" + Id;
+            return string.Format("[{0}] [{1}] {2}", TimeStamp, source, Message);
         }
     }
 }

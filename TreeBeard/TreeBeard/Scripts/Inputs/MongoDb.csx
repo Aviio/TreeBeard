@@ -45,7 +45,7 @@ public class MongoDbInput : AbstractInput
         var query = Query.GT("_id", _lastId);
         foreach (var document in _mongoCollection.Find(query).SetSortOrder("$natural"))
         {
-            yield return new BsonEvent(Source, document);
+            yield return new BsonEvent(Type, Id, document);
             _lastId = document["_id"];
         }
     }
@@ -72,8 +72,8 @@ public class MongoDbInput : AbstractInput
     {
         private readonly BsonDocument _document;
 
-        public BsonEvent(string source, BsonDocument document)
-            : base(source, document.ToJson(), GetTimeStamp(document))
+        public BsonEvent(string type, string id, BsonDocument document)
+            : base(type, id, document.ToJson(), GetTimeStamp(document))
         {
             _document = document;
         }

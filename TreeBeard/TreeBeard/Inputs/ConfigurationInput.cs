@@ -16,7 +16,7 @@ namespace TreeBeard.Inputs
 
         public override void Initialize(params string[] args)
         {
-            _input = ScriptUtils.ConstructInput(args[0], args.SubArray(1));
+            _input = ScriptUtils.ConstructInput(args[0], args[1], args.SubArray(2));
         }
     }
 }

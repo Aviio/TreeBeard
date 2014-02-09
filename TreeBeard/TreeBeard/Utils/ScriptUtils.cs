@@ -30,10 +30,11 @@ namespace TreeBeard.Utils
             return filter;
         }
 
-        public static IInput ConstructInput(string name, params string[] args)
+        public static IInput ConstructInput(string type, string id, params string[] args)
         {
-            IInput input = Construct<IInput>(name.Split(':')[0], args);
-            input.Source = name;
+            IInput input = Construct<IInput>(type, args);
+            input.Type = type;
+            input.Id = id;
 
             return input;
         }
@@ -61,8 +62,6 @@ namespace TreeBeard.Utils
             T result = CSScript.LoadCode(code).CreateObject(typeName).AlignToInterface<T>();
 
             return result;
-        }
-
-        
+        } 
     }
 }

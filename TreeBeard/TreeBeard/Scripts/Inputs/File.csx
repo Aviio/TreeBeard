@@ -54,7 +54,7 @@ public class FileInput : AbstractInput
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    yield return new Event(Source, line);
+                    yield return new Event(Type, Id, line);
                 }
                 _position = fs.Position;
             }

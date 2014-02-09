@@ -5,7 +5,8 @@ namespace TreeBeard.Interfaces
 {
     public interface IEvent
     {
-        string Source { get; set; }
+        string Type { get; set; }
+        string Id { get; set; }
         string Message { get; set; }
         DateTime TimeStamp { get; set; }
 

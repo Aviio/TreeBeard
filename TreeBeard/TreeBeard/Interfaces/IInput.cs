@@ -5,7 +5,8 @@ namespace TreeBeard.Interfaces
 {
     public interface IInput : IInitializable
     {
-        string Source { get; set; }
+        string Type { get; set; }
+        string Id { get; set; }
 
         IObservable<IEvent> Execute();
     }

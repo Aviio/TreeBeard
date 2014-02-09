@@ -8,6 +8,7 @@ namespace TreeBeard.Inputs
         public abstract IObservable<IEvent> Execute();
         public abstract void Initialize(params string[] args);
 
-        public string Source { get; set; }
+        public string Type { get; set; }
+        public string Id { get; set; }
     }
 }
