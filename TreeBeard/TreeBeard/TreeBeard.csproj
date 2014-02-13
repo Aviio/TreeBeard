@@ -77,6 +77,11 @@
     <Compile Include="Inputs\ConfigurationInput.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
+    <Compile Include="Scripts\Filters\RegExTimeStampFilter.cs" />
+    <Compile Include="Scripts\Inputs\FileInput.cs" />
+    <Compile Include="Scripts\Inputs\MongoDbInput.cs" />
+    <Compile Include="Scripts\Inputs\SqlServerInput.cs" />
+    <Compile Include="Scripts\Outputs\ConsoleInput.cs" />
     <Compile Include="Utils\OutputEventArgs.cs" />
     <Compile Include="Outputs\ConfigurationOutput.cs" />
     <Compile Include="Interfaces\IOutput.cs" />
@@ -107,6 +112,7 @@
     <Content Include="Scripts\Outputs\Console.csx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Scripts\Inputs\SqlServer.csx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\System.Linq.Dynamic\System.Linq.Dynamic.csproj">
