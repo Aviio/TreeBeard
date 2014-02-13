@@ -49,5 +49,34 @@ namespace TreeBeard.Configuration
 
             return configuration;
         }
+        public static FluentConfiguration AddInput<T>(this FluentConfiguration configuration, params string[] args)
+            where T : IInput, new()
+        {
+            IInput input = new T();
+            input.Initialize(args);
+            configuration.Inputs.Add(input);
+
+            return configuration;
+        }
+
+        public static FluentConfiguration AddFilter<T>(this FluentConfiguration configuration, params string[] args)
+            where T : IFilter, new()
+        {
+            IFilter filter = new T();
+            filter.Initialize(args);
+            configuration.Filters.Add(filter);
+
+            return configuration;
+        }
+
+        public static FluentConfiguration AddOutput<T>(this FluentConfiguration configuration, params string[] args)
+            where T : IOutput, new()
+        {
+            IOutput output = new T();
+            output.Initialize(args);
+            configuration.Outputs.Add(output);
+
+            return configuration;
+        }
     }
 }
