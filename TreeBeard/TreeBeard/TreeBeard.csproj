@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BinaryRage, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\BinaryRage.dll</HintPath>
+    </Reference>
     <Reference Include="CSScriptLibrary">
       <HintPath>..\packages\CS-Script.3.7.0.0\lib\net45\CSScriptLibrary.dll</HintPath>
     </Reference>
@@ -67,6 +71,7 @@
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Filters\AbstractFilter.cs" />
     <Compile Include="Inputs\AbstractInput.cs" />
+    <Compile Include="Inputs\AbstractInputWithPosition.cs" />
     <Compile Include="Interfaces\IConfiguration.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
     <Compile Include="Events\Event.cs" />
@@ -82,6 +87,7 @@
     <Compile Include="Scripts\Inputs\MongoDbInput.cs" />
     <Compile Include="Scripts\Inputs\SqlServerInput.cs" />
     <Compile Include="Scripts\Outputs\ConsoleInput.cs" />
+    <Compile Include="Utils\KeyStore.cs" />
     <Compile Include="Utils\OutputEventArgs.cs" />
     <Compile Include="Outputs\ConfigurationOutput.cs" />
     <Compile Include="Interfaces\IOutput.cs" />

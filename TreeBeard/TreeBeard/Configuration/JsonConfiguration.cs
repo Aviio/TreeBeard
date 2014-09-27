@@ -12,6 +12,7 @@ namespace TreeBeard.Configuration
 {
     public class JsonConfiguration : IConfiguration
     {
+        public string KeyStoreLocation { get; set; }
         public List<IInput> Inputs { get; private set; }
         public List<IFilter> Filters { get; private set; }
         public List<IOutput> Outputs { get; private set; }
@@ -25,6 +26,7 @@ namespace TreeBeard.Configuration
             string json = File.ReadAllText(fileName);
             dynamic config = JsonConvert.DeserializeObject(json);
 
+            KeyStoreLocation = config.keyStoreLocation;
             foreach (dynamic input in config.inputs)
             {
                 AddInput(input);

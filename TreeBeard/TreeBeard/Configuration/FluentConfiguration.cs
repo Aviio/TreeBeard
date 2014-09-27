@@ -9,12 +9,14 @@ namespace TreeBeard.Configuration
 {
     public class FluentConfiguration : IConfiguration
     {
+        public string KeyStoreLocation { get; set; }
         public List<IInput> Inputs { get; set; }
         public List<IFilter> Filters { get; set; }
         public List<IOutput> Outputs { get; set; }
 
-        public FluentConfiguration()
+        public FluentConfiguration(string keyStoreLocation)
         {
+            KeyStoreLocation = keyStoreLocation;
             Inputs = new List<IInput>();
             Filters = new List<IFilter>();
             Outputs = new List<IOutput>();
