@@ -34,6 +34,12 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.2\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.2\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +50,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ConsoleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ConsoleControl.Designer.cs">
+      <DependentUpon>ConsoleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EventInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EventInputControl.Designer.cs">
+      <DependentUpon>EventInputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FilterControl.Designer.cs">
+      <DependentUpon>FilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\InputControl.Designer.cs">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OutputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OutputControl.Designer.cs">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PredicateInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PredicateInputControl.Designer.cs">
+      <DependentUpon>PredicateInputControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +100,42 @@
     <Compile Include="Views\FilterPredicateView.Designer.cs">
       <DependentUpon>FilterPredicateView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FilterView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\FilterView.Designer.cs">
+      <DependentUpon>FilterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\InputView.Designer.cs">
+      <DependentUpon>InputView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OutputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\OutputView.Designer.cs">
+      <DependentUpon>OutputView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\ConsoleControl.resx">
+      <DependentUpon>ConsoleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EventInputControl.resx">
+      <DependentUpon>EventInputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FilterControl.resx">
+      <DependentUpon>FilterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\InputControl.resx">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OutputControl.resx">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PredicateInputControl.resx">
+      <DependentUpon>PredicateInputControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +151,16 @@
     <EmbeddedResource Include="Views\FilterPredicateView.resx">
       <DependentUpon>FilterPredicateView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\FilterView.resx">
+      <DependentUpon>FilterView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InputView.resx">
+      <DependentUpon>InputView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OutputView.resx">
+      <DependentUpon>OutputView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -7,7 +7,7 @@ using TreeBeard.Interfaces;
 
 namespace TreeBeard.Outputs
 {
-    internal class ConfigurationOutput : IOutput
+    public class ConfigurationOutput : IOutput
     {
         private IOutput _output;
 

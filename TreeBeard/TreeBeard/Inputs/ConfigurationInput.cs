@@ -5,7 +5,7 @@ using TreeBeard.Utils;
 
 namespace TreeBeard.Inputs
 {
-    internal class ConfigurationInput : AbstractInput
+    public class ConfigurationInput : AbstractInput
     {
         private IInput _input;
 

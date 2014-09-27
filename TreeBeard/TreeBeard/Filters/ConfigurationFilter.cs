@@ -5,7 +5,7 @@ using TreeBeard.Utils;
 
 namespace TreeBeard.Filters
 {
-    internal class ConfigurationFilter : AbstractFilter
+    public class ConfigurationFilter : AbstractFilter
     {
         private IFilter _filter;
 
