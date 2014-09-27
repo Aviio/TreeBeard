@@ -10,7 +10,7 @@ namespace TreeBeard.Inputs
         /// <summary>
         /// Checks if current position has been initialized
         /// </summary>
-        public bool IsPositionInitialized()
+        protected bool IsPositionInitialized()
         {
             return _isPositionInitialized;
         }
@@ -19,7 +19,7 @@ namespace TreeBeard.Inputs
         /// Clears current position initialized flag
         /// Note that this does not actually clear the current value.
         /// </summary>
-        public void ClearPosition()
+        protected void ClearPosition()
         {
             _isPositionInitialized = false;
         }
@@ -27,7 +27,7 @@ namespace TreeBeard.Inputs
         /// <summary>
         /// Initialize current position.  Uses default value if no value currently stored
         /// </summary>
-        public void InitPosition(T defaultValue)
+        protected void InitPosition(T defaultValue)
         {
             if (KeyStore.Exists(Id))
             {
@@ -43,7 +43,7 @@ namespace TreeBeard.Inputs
         /// <summary>
         /// Set current position
         /// </summary>
-        public void SetPosition(T value)
+        protected void SetPosition(T value)
         {
             _position = value;
             KeyStore.Insert<T>(Id, value);
@@ -52,7 +52,7 @@ namespace TreeBeard.Inputs
         /// <summary>
         /// Get current position
         /// </summary>
-        public T GetPosition()
+        protected T GetPosition()
         {
             return _position;
         }

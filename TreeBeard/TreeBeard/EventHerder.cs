@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using TreeBeard.ExtensionMethods;
 using TreeBeard.Interfaces;
 using TreeBeard.Utils;
 
@@ -80,17 +81,27 @@ namespace TreeBeard
 
         private void FilterEvent(IEvent value)
         {
+            //Log.Information("Filter", "Input", value.AsString());
+            //int i = 0;
             foreach (IFilter filter in _configuration.Filters)
             {
+                //string logName = "Filter" + (++i).ToString();
                 if ((filter.Predicate != null) ? filter.Predicate(value) : true)
                 {
                     value = filter.Execute(value);
                     if (value == null)
                     {
+                        //Log.Information(logName, "Drop", null);
                         return;
                     }
+                    //Log.Information(logName, "Intermediate", value.AsString());
                 }
+                //else
+                //{
+                //    Log.Information(logName, "Ignored", value.AsString());
+                //}
             }
+            //Log.Information("Filter", "Output", value.AsString());
             OutputEvent(this, new OutputEventArgs(value));
         }
     }

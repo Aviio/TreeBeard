@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Configuration\FluentConfiguration.cs" />
     <Compile Include="ExtensionMethods\ArrayExtensions.cs" />
+    <Compile Include="ExtensionMethods\ObservableExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Filters\AbstractFilter.cs" />
     <Compile Include="Inputs\AbstractInput.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Scripts\Inputs\SqlServerInput.cs" />
     <Compile Include="Scripts\Outputs\ConsoleInput.cs" />
     <Compile Include="Utils\KeyStore.cs" />
+    <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\OutputEventArgs.cs" />
     <Compile Include="Outputs\ConfigurationOutput.cs" />
     <Compile Include="Interfaces\IOutput.cs" />
