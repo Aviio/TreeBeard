@@ -9,7 +9,7 @@ namespace TreeBeard.Inputs
         public abstract IObservable<IEvent> Execute();
         public abstract void Initialize(params string[] args);
 
-        public string Type { get; set; }
-        public string Id { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string Id { get; set; }
     }
 }
