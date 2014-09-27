@@ -7,7 +7,7 @@ using TreeBeard.Events;
 using TreeBeard.Inputs;
 using TreeBeard.Interfaces;
 
-public class SqlServerInput : AbstractInput
+public class SqlServerInput : AbstractInputWithPosition<int>
 {
     private string _uri;
     private string _database;
@@ -18,7 +18,6 @@ public class SqlServerInput : AbstractInput
     private string _password;
 
     private SqlConnection _connection;
-    private int _lastId;
 
     public override void Initialize(params string[] args)
     {
@@ -44,22 +43,22 @@ public class SqlServerInput : AbstractInput
         if (_connection == null)
         {
             _connection = GetConnection();
-            _lastId = 0;
+            ClearPosition();
         }
         if (_connection.State == ConnectionState.Closed)
         {
             _connection.Open();
-            _lastId = 0;
+            ClearPosition();
         }
-        if (_lastId <= 0)
+        if (!IsPositionInitialized())
         {
-            _lastId = GetLastId();
+            InitPosition(GetLastId());
         }
 
         string sql = string.Format("SELECT * FROM {0} WHERE {1} > @0 ORDER BY {1} DESC", _table, _idColumn);
         using (SqlCommand command = new SqlCommand(sql, _connection))
         {
-            command.Parameters.Add("@0", SqlDbType.Int).Value = _lastId;
+            command.Parameters.Add("@0", SqlDbType.Int).Value = GetPosition();
 
             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
             {
@@ -68,7 +67,7 @@ public class SqlServerInput : AbstractInput
 
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    int lastId = _lastId;
+                    int position = GetPosition();
                     DateTime timeStamp = DateTime.Now;
                     string message = "";
                     foreach (DataColumn column in dataTable.Columns)
@@ -76,12 +75,12 @@ public class SqlServerInput : AbstractInput
                         if (!string.IsNullOrEmpty(message)) message += ",";
                         message += string.Format("{0}:\"{1}\"", column.ColumnName, row[column]);
 
-                        if (column.ColumnName == _idColumn) lastId = Convert.ToInt32(row[column]);
+                        if (column.ColumnName == _idColumn) position = Convert.ToInt32(row[column]);
                         if (column.ColumnName == _timeStampColumn) timeStamp = Convert.ToDateTime(row[column]);
                     }
                     message = "{" + message + "}";
                     yield return new Event(Type, Id, message, timeStamp);
-                    _lastId = lastId;
+                    SetPosition(position);
                 }
             }
         }

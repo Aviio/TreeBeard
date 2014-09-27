@@ -8,11 +8,10 @@ using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
 
-public class FileInput : AbstractInput
+public class FileInput : AbstractInputWithPosition<long>
 {
     private string _fileName;
     private FileSystemWatcher _watcher;
-    private long _position;
 
     public override IObservable<IEvent> Execute()
     {
@@ -36,27 +35,27 @@ public class FileInput : AbstractInput
         _watcher.NotifyFilter = NotifyFilters.Size;
         _watcher.EnableRaisingEvents = true;
 
-        _position = GetEndPosition();
+        InitPosition(GetEndPosition());
     }
 
     private IEnumerable<IEvent> SelectLines(EventPattern<FileSystemEventArgs> e)
     {
         var currentSize = new FileInfo(e.EventArgs.FullPath).Length;
-        if (currentSize < _position)
+        if (currentSize < GetPosition())
         {
-            _position = 0;
+            SetPosition(0);
         }
         using (FileStream fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
             using (StreamReader sr = new StreamReader(fs, true))
             {
-                fs.Seek(_position, SeekOrigin.Begin);
+                fs.Seek(GetPosition(), SeekOrigin.Begin);
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     yield return new Event(Type, Id, line);
                 }
-                _position = fs.Position;
+                SetPosition(fs.Position);
             }
         }
     }

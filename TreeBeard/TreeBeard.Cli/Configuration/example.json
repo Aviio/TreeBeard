@@ -1,4 +1,5 @@
 ﻿{
+	keyStoreLocation : "keystore.db",
 	inputs : [
 		{ type : "MongoDb", args : [ "mongodb://localhost:27017", "database", "collection1" ] },
 		{ type : "MongoDb", id : "c2", args : [ "mongodb://localhost:27017", "database", "collection2" ] },

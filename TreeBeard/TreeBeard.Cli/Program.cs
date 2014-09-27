@@ -23,10 +23,10 @@ namespace TreeBeard.Cli
             else
             {
                 // FOR LOCAL TESTING PURPOSES
-                configuration = new FluentConfiguration()
-                    .AddInput("MongoDb", "logs2", "mongodb://localhost:27017", "logstash", "logs2")
+                configuration = new FluentConfiguration(@".\db")
+                    .AddInput("MongoDb", "logs", "mongodb://localhost:27017", "logstash", "logs")
                     //.AddInput("MongoDb", "logs3", "mongodb://localhost:27017", "logstash", "logs3")
-                    //.AddInput("File", "1", @"D:\log-file.txt")
+                    .AddInput("File", "1", @"D:\log-file.txt")
                     //.AddInput("File", "2", @"D:\log-file.txt")
                     //.AddFilter("RegExTimeStamp", "Type==\"File\" && Id==\"2\"", @"^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}")
                     //.AddInput<SqlServerInput>("ServerName", "DatabaseName", "TableName", "TableId", "CurrentDate", "UserName", "Password")

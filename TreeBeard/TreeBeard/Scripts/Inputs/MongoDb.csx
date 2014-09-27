@@ -10,14 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 
-public class MongoDbInput : AbstractInput
+public class MongoDbInput : AbstractInputWithPosition<BsonValue>
 {
     private string _uri;
     private string _database;
     private string _collection;
 
     private MongoCollection<BsonDocument> _mongoCollection;
-    private BsonValue _lastId;
 
     public override IObservable<IEvent> Execute()
     {
@@ -36,17 +35,17 @@ public class MongoDbInput : AbstractInput
         if (_mongoCollection == null)
         {
             _mongoCollection = GetMongoCollection();
-            _lastId = null;
+            ClearPosition();
         }
-        if (_lastId == null)
+        if (!IsPositionInitialized())
         {
-            _lastId = GetLastId(_mongoCollection);
+            InitPosition(GetLastId(_mongoCollection));
         }
-        var query = Query.GT("_id", _lastId);
+        var query = Query.GT("_id", GetPosition());
         foreach (var document in _mongoCollection.Find(query).SetSortOrder("$natural"))
         {
             yield return new BsonEvent(Type, Id, document);
-            _lastId = document["_id"];
+            SetPosition(document["_id"]);
         }
     }
 

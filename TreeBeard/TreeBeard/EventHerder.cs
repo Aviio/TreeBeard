@@ -46,6 +46,9 @@ namespace TreeBeard
         {
             if (!IsExecutable) return;
 
+            // set keystore location
+            KeyStore.SetLocation(_configuration.KeyStoreLocation);
+
             // merge inputs
             IObservable<IEvent> filterSource = (from input in _configuration.Inputs
                                                select input.Execute()).Merge();
