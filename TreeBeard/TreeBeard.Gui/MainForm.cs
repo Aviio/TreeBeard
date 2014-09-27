@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TreeBeard.Gui.Views;
 
@@ -25,6 +18,21 @@ namespace TreeBeard.Gui
             DisplayView<FilterPredicateView>(btnFilterPredicate);
         }
 
+        private void btnInput_Click(object sender, EventArgs e)
+        {
+            DisplayView<InputView>(btnInput);
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            DisplayView<FilterView>(btnFilter);
+        }
+
+        private void btnOutput_Click(object sender, EventArgs e)
+        {
+            DisplayView<OutputView>(btnOutput);
+        }
+
         private void DisplayView<T>(ToolStripButton sender)
             where T : UserControl, new()
         {
@@ -34,7 +42,10 @@ namespace TreeBeard.Gui
                 ToolStripButton button = item as ToolStripButton;
                 if (button != null)
                 {
-                    viewChanged = (button == sender && !button.Checked);
+                    if (button == sender)
+                    {
+                        viewChanged = (!button.Checked);
+                    }
                     button.Checked = (button == sender);
                 }
             }

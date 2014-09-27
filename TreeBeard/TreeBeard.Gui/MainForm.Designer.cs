@@ -32,13 +32,19 @@
             this.tspMain = new System.Windows.Forms.ToolStrip();
             this.btnFilterPredicate = new System.Windows.Forms.ToolStripButton();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.btnInput = new System.Windows.Forms.ToolStripButton();
+            this.btnFilter = new System.Windows.Forms.ToolStripButton();
+            this.btnOutput = new System.Windows.Forms.ToolStripButton();
             this.tspMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tspMain
             // 
             this.tspMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnFilterPredicate});
+            this.btnFilterPredicate,
+            this.btnInput,
+            this.btnFilter,
+            this.btnOutput});
             this.tspMain.Location = new System.Drawing.Point(0, 0);
             this.tspMain.Name = "tspMain";
             this.tspMain.Size = new System.Drawing.Size(735, 25);
@@ -64,6 +70,37 @@
             this.pnlMain.Size = new System.Drawing.Size(711, 395);
             this.pnlMain.TabIndex = 1;
             // 
+            // btnInput
+            // 
+            this.btnInput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnInput.Image = ((System.Drawing.Image)(resources.GetObject("btnInput.Image")));
+            this.btnInput.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInput.Name = "btnInput";
+            this.btnInput.Size = new System.Drawing.Size(44, 22);
+            this.btnInput.Text = "Inputs";
+            this.btnInput.ToolTipText = "Inputs";
+            this.btnInput.Click += new System.EventHandler(this.btnInput_Click);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
+            this.btnFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(42, 22);
+            this.btnFilter.Text = "Filters";
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnOutput
+            // 
+            this.btnOutput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnOutput.Image = ((System.Drawing.Image)(resources.GetObject("btnOutput.Image")));
+            this.btnOutput.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOutput.Name = "btnOutput";
+            this.btnOutput.Size = new System.Drawing.Size(54, 22);
+            this.btnOutput.Text = "Outputs";
+            this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -85,6 +122,9 @@
         private System.Windows.Forms.ToolStrip tspMain;
         private System.Windows.Forms.ToolStripButton btnFilterPredicate;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.ToolStripButton btnInput;
+        private System.Windows.Forms.ToolStripButton btnFilter;
+        private System.Windows.Forms.ToolStripButton btnOutput;
     }
 }
 

@@ -19,8 +19,8 @@ namespace TreeBeard.Gui.Views
             lblResult.BackColor = SystemColors.Control;
             lblResult.Text = "...";
 
-            IEvent value = GetEvent();
-            Func<IEvent, bool> predicate = GetPredicate();
+            IEvent value = uclEventInput.GetEvent();
+            Func<IEvent, bool> predicate = uclPredicateInput.GetPredicate();
             if (predicate == null)
             {
                 return;
@@ -34,24 +34,6 @@ namespace TreeBeard.Gui.Views
             {
                 lblResult.BackColor = Color.Red;
                 lblResult.Text = "FALSE";
-            }
-        }
-
-        private IEvent GetEvent()
-        {
-            return new Event(txtType.Text, txtId.Text, txtMessage.Text, dtpTimeStamp.Value);
-        }
-
-        private Func<IEvent, bool> GetPredicate()
-        {
-            try
-            {
-                return txtPredicate.Text.GetFunc<IEvent, bool>();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return null;
             }
         }
     }
