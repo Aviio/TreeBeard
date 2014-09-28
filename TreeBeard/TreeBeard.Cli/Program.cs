@@ -32,10 +32,8 @@ namespace TreeBeard.Cli
                     //.AddInput<SqlServerInput>("ServerName", "DatabaseName", "TableName", "TableId", "CurrentDate", "UserName", "Password")
                     .AddOutput<ConsoleOutput>();
             }
-            using (IEventHerder eventHerder = new EventHerder(configuration))
+            using (EventHerder eventHerder = new EventHerder(configuration))
             {
-                eventHerder.Execute();
-
                 Console.WriteLine("Press ENTER to exit...");
                 Console.ReadLine();
             }

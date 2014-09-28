@@ -3,7 +3,7 @@ using System;
 
 namespace TreeBeard.Utils
 {
-    public static class Log
+    internal static class Log
     {
         private static bool _isDebug = false;
 
