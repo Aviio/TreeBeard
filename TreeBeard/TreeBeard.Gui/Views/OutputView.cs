@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TreeBeard.Events;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Views
@@ -15,7 +16,7 @@ namespace TreeBeard.Gui.Views
         {
             uclConsole.Clear();
 
-            IEvent value = uclEventInput.GetEvent();
+            Event value = uclEventInput.GetEvent();
             IOutput output = uclOutput.GetOutput();
             if (output != null)
             {

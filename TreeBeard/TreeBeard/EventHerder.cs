@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TreeBeard.Events;
 using TreeBeard.Exceptions;
 using TreeBeard.Interfaces;
 using TreeBeard.Utils;
@@ -21,10 +22,10 @@ namespace TreeBeard
             KeyStore.Initialize(configuration.KeyStoreLocation);
 
             // create pipeline
-            _pipeline = new Pipeline<IEvent>(
+            _pipeline = new Pipeline<Event>(
                     configuration.Inputs.Select(i => i.Execute()),
-                    configuration.Filters.Select(f => new KeyValuePair<Func<IEvent, bool>, Func<IEvent, IEvent>>(f.Predicate, f.Execute)),
-                    configuration.Outputs.Select<IOutput, Action<IEvent>>(o => o.Execute)
+                    configuration.Filters.Select(f => new KeyValuePair<Func<Event, bool>, Func<Event, Event>>(f.Predicate, f.Execute)),
+                    configuration.Outputs.Select<IOutput, Action<Event>>(o => o.Execute)
                 );
         }
 

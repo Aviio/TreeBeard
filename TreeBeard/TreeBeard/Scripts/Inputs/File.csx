@@ -13,7 +13,7 @@ public class FileInput : AbstractInputWithPosition<long>
     private string _fileName;
     private FileSystemWatcher _watcher;
 
-    public override IObservable<IEvent> Execute()
+    public override IObservable<Event> Execute()
     {
         Initialize();
 
@@ -38,7 +38,7 @@ public class FileInput : AbstractInputWithPosition<long>
         InitPosition(GetEndPosition());
     }
 
-    private IEnumerable<IEvent> SelectLines(EventPattern<FileSystemEventArgs> e)
+    private IEnumerable<Event> SelectLines(EventPattern<FileSystemEventArgs> e)
     {
         var currentSize = new FileInfo(e.EventArgs.FullPath).Length;
         if (currentSize < GetPosition())
@@ -53,7 +53,9 @@ public class FileInput : AbstractInputWithPosition<long>
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    yield return new Event(Type, Id, line);
+                    dynamic ev = new Event(Type, Id);
+                    ev.Message = line;
+                    yield return ev;
                 }
                 SetPosition(fs.Position);
             }

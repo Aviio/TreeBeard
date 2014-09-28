@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\FluentConfiguration.cs" />
+    <Compile Include="Events\Event.cs" />
     <Compile Include="Exceptions\InvalidConfigurationException.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\ObservableExtensions.cs" />
@@ -80,13 +81,11 @@
     <Compile Include="Inputs\AbstractInputWithPosition.cs" />
     <Compile Include="Interfaces\IConfiguration.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
-    <Compile Include="Events\Event.cs" />
     <Compile Include="Exceptions\TypeConstructionException.cs" />
     <Compile Include="Filters\ConfigurationFilter.cs" />
     <Compile Include="Interfaces\IInitializable.cs" />
     <Compile Include="Inputs\ConfigurationInput.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
-    <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Scripts\Filters\RegExTimeStampFilter.cs" />
     <Compile Include="Scripts\Inputs\FileInput.cs" />

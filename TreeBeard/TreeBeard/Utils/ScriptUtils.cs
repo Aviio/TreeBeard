@@ -3,6 +3,7 @@ using CSScriptLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TreeBeard.Events;
 using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 
@@ -25,7 +26,7 @@ namespace TreeBeard.Utils
         public static IFilter ConstructFilter(string name, string predicate, params string[] args)
         {
             IFilter filter = Construct<IFilter>(name, args);
-            filter.Predicate = predicate.GetFunc<IEvent, bool>();
+            filter.Predicate = predicate.GetFunc<Event, bool>();
 
             return filter;
         }

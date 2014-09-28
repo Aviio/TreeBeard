@@ -6,14 +6,18 @@ namespace TreeBeard.Gui.Controls
 {
     public partial class EventInputControl : UserControl
     {
+        // TODO need to provide method of entering dynamic content
+
         public EventInputControl()
         {
             InitializeComponent();
         }
 
-        public IEvent GetEvent()
+        public Event GetEvent()
         {
-            return new Event(txtType.Text, txtId.Text, txtMessage.Text, dtpTimeStamp.Value);
+            dynamic ev = new Event(txtType.Text, txtId.Text, dtpTimeStamp.Value);
+            ev.Message = txtMessage.Text;
+            return ev;
         }
     }
 }
