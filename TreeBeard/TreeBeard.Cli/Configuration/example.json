@@ -7,7 +7,7 @@
 		{ type : "File", id : "2", args : [ "C:\\log.txt" ] }
 	],
 	filters : [
-		{ type : "RegExTimeStamp", predicate : "Source==\"File:2\"", args : [ "^[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}" ] }
+		{ type : "RegExTimeStamp", predicate : "Source==\"File:2\"", args : [ "^[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}", "Message" ] }
 	],
 	outputs : [
 		{ type : "Console", args : [] }

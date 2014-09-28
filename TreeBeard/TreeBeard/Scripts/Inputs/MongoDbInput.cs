@@ -16,7 +16,7 @@
 
 //        private MongoCollection<BsonDocument> _mongoCollection;
 
-//        public override IObservable<IEvent> Execute()
+//        public override IObservable<Event> Execute()
 //        {
 //            return Observable.Interval(TimeSpan.FromSeconds(1)).SelectMany(_ => GetEvents());
 //        }
@@ -28,7 +28,7 @@
 //            _collection = args[2];
 //        }
 
-//        private IEnumerable<IEvent> GetEvents()
+//        private IEnumerable<Event> GetEvents()
 //        {
 //            if (_mongoCollection == null)
 //            {
@@ -42,7 +42,12 @@
 //            var query = Query.GT("_id", GetPosition());
 //            foreach (var document in _mongoCollection.Find(query).SetSortOrder("$natural"))
 //            {
-//                yield return new BsonEvent(Type, Id, document);
+//                dynamic ev = new Event(Type, Id, GetTimeStamp(document["_id"]));
+//                foreach (BsonElement element in document)
+//                {
+//                    ev.SetMember(element.Name.ToLower(), element.Value.ToJson());
+//                }
+//                yield return ev;
 //                SetPosition(document["_id"]);
 //            }
 //        }
@@ -65,21 +70,10 @@
 //            return (lastRecord != null) ? lastRecord["_id"] : BsonMinKey.Value;
 //        }
 
-//        private class BsonEvent : Event
+//        private DateTime GetTimeStamp(BsonValue value)
 //        {
-//            private readonly BsonDocument _document;
-
-//            public BsonEvent(string type, string id, BsonDocument document)
-//                : base(type, id, document.ToJson(), GetTimeStamp(document))
-//            {
-//                _document = document;
-//            }
-
-//            private static DateTime GetTimeStamp(BsonDocument document)
-//            {
-//                var objectId = document["_id"] as BsonObjectId;
-//                return (objectId != null) ? objectId.Value.CreationTime : DateTime.Now;
-//            }
+//            BsonObjectId objectId = value as BsonObjectId;
+//            return (objectId != null) ? objectId.Value.CreationTime : DateTime.Now;
 //        }
 //    }
 //}

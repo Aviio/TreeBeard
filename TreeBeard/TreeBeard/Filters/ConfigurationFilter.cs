@@ -1,4 +1,5 @@
 ﻿using System;
+using TreeBeard.Events;
 using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 using TreeBeard.Utils;
@@ -9,7 +10,7 @@ namespace TreeBeard.Filters
     {
         private IFilter _filter;
 
-        public override Func<IEvent, bool> Predicate
+        public override Func<Event, bool> Predicate
         {
             get { 
                 return (_filter != null) ? _filter.Predicate : null; 
@@ -17,7 +18,7 @@ namespace TreeBeard.Filters
             set { }
         }
 
-        public override IEvent Execute(IEvent value)
+        public override Event Execute(Event value)
         {
             return _filter.Execute(value);
         }

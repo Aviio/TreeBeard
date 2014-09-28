@@ -1,4 +1,5 @@
 ﻿using System;
+using TreeBeard.Events;
 using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 using TreeBeard.Utils;
@@ -21,7 +22,7 @@ namespace TreeBeard.Inputs
             set { throw new NotImplementedException(); } 
         }
 
-        public override IObservable<IEvent> Execute()
+        public override IObservable<Event> Execute()
         {
             return _input.Execute();
         }

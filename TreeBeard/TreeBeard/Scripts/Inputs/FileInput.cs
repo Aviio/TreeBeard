@@ -5,7 +5,6 @@ using System.Reactive;
 using System.Reactive.Linq;
 using TreeBeard.Events;
 using TreeBeard.Inputs;
-using TreeBeard.Interfaces;
 
 namespace TreeBeard.Scripts.Inputs
 {
@@ -14,7 +13,7 @@ namespace TreeBeard.Scripts.Inputs
         private string _fileName;
         private FileSystemWatcher _watcher;
 
-        public override IObservable<IEvent> Execute()
+        public override IObservable<Event> Execute()
         {
             Initialize();
 
@@ -39,7 +38,7 @@ namespace TreeBeard.Scripts.Inputs
             InitPosition(GetEndPosition());
         }
 
-        private IEnumerable<IEvent> SelectLines(EventPattern<FileSystemEventArgs> e)
+        private IEnumerable<Event> SelectLines(EventPattern<FileSystemEventArgs> e)
         {
             var currentSize = new FileInfo(e.EventArgs.FullPath).Length;
             if (currentSize < GetPosition())
@@ -54,7 +53,9 @@ namespace TreeBeard.Scripts.Inputs
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        yield return new Event(Type, Id, line);
+                        dynamic ev = new Event(Type, Id);
+                        ev.Message = line;
+                        yield return ev;
                     }
                     SetPosition(fs.Position);
                 }

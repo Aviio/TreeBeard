@@ -1,15 +1,16 @@
 ﻿using System;
-using TreeBeard.ExtensionMethods;
+using TreeBeard.Events;
+using TreeBeard.Extensions;
 using TreeBeard.Filters;
-using TreeBeard.Interfaces;
 
 public class RegExTimeStampFilter : AbstractFilter
 {
     private string _regEx;
+    private string _property;
 
-    public override IEvent Execute(IEvent value)
+    public override Event Execute(Event value)
     {
-        DateTime? timeStamp = value.Message.GetTimeStamp(_regEx);
+        DateTime? timeStamp = value.GetMember(_property).ToString().GetTimeStamp(_regEx);
         if (timeStamp != null)
         {
             value.TimeStamp = timeStamp.Value;
@@ -20,5 +21,6 @@ public class RegExTimeStampFilter : AbstractFilter
     public override void Initialize(params string[] args)
     {
         _regEx = args[0];
+        _property = args[1];
     }
 }

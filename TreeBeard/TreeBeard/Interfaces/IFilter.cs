@@ -1,12 +1,13 @@
 ﻿
 using System;
+using TreeBeard.Events;
 
 namespace TreeBeard.Interfaces
 {
     public interface IFilter : IInitializable
     {
-        Func<IEvent, bool> Predicate { get; set; }
+        Func<Event, bool> Predicate { get; set; }
 
-        IEvent Execute(IEvent value);
+        Event Execute(Event value);
     }
 }

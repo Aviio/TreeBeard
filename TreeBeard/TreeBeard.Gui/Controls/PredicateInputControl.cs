@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using TreeBeard.Events;
 using TreeBeard.Extensions;
-using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Controls
 {
@@ -12,11 +12,11 @@ namespace TreeBeard.Gui.Controls
             InitializeComponent();
         }
 
-        public Func<IEvent, bool> GetPredicate()
+        public Func<Event, bool> GetPredicate()
         {
             try
             {
-                return txtPredicate.Text.GetFunc<IEvent, bool>();
+                return txtPredicate.Text.GetFunc<Event, bool>();
             }
             catch (Exception e)
             {

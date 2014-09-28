@@ -33,12 +33,12 @@ public class SqlServerInput : AbstractInputWithPosition<int>
         }
     }
 
-    public override IObservable<IEvent> Execute()
+    public override IObservable<Event> Execute()
     {
         return Observable.Interval(TimeSpan.FromSeconds(1)).SelectMany(_ => GetEvents());
     }
 
-    private IEnumerable<IEvent> GetEvents()
+    private IEnumerable<Event> GetEvents()
     {
         if (_connection == null)
         {
@@ -68,18 +68,15 @@ public class SqlServerInput : AbstractInputWithPosition<int>
                 foreach (DataRow row in dataTable.Rows)
                 {
                     int position = GetPosition();
-                    DateTime timeStamp = DateTime.Now;
-                    string message = "";
+                    dynamic ev = new Event(Type, Id);
                     foreach (DataColumn column in dataTable.Columns)
                     {
-                        if (!string.IsNullOrEmpty(message)) message += ",";
-                        message += string.Format("{0}:\"{1}\"", column.ColumnName, row[column]);
+                        ev.SetMember(column.ColumnName.ToLower(), row[column]);
 
                         if (column.ColumnName == _idColumn) position = Convert.ToInt32(row[column]);
-                        if (column.ColumnName == _timeStampColumn) timeStamp = Convert.ToDateTime(row[column]);
+                        if (column.ColumnName == _timeStampColumn) ev.TimeStamp = Convert.ToDateTime(row[column]);
                     }
-                    message = "{" + message + "}";
-                    yield return new Event(Type, Id, message, timeStamp);
+                    yield return ev;
                     SetPosition(position);
                 }
             }

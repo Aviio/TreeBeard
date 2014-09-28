@@ -1,5 +1,6 @@
 ﻿
 using System;
+using TreeBeard.Events;
 
 namespace TreeBeard.Interfaces
 {
@@ -8,6 +9,6 @@ namespace TreeBeard.Interfaces
         string Type { get; set; }
         string Id { get; set; }
 
-        IObservable<IEvent> Execute();
+        IObservable<Event> Execute();
     }
 }

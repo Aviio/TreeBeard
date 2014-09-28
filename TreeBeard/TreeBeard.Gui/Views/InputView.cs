@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TreeBeard.Events;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Views
@@ -40,12 +41,12 @@ namespace TreeBeard.Gui.Views
             Console.WriteLine("Stopped");
         }
 
-        private void Subscribe(IObservable<IEvent> source, Action<IEvent> handler)
+        private void Subscribe(IObservable<Event> source, Action<Event> handler)
         {
             _subscription = source.Subscribe(handler);
         }
 
-        private void OutputToConsole(IEvent e)
+        private void OutputToConsole(Event e)
         {
             Console.WriteLine(e.AsString());
         }

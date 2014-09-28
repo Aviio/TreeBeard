@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using TreeBeard.Events;
-using TreeBeard.Extensions;
-using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Views
 {
@@ -19,8 +17,8 @@ namespace TreeBeard.Gui.Views
             lblResult.BackColor = SystemColors.Control;
             lblResult.Text = "...";
 
-            IEvent value = uclEventInput.GetEvent();
-            Func<IEvent, bool> predicate = uclPredicateInput.GetPredicate();
+            Event value = uclEventInput.GetEvent();
+            Func<Event, bool> predicate = uclPredicateInput.GetPredicate();
             if (predicate == null)
             {
                 return;

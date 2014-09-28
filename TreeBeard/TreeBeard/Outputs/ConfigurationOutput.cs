@@ -11,7 +11,7 @@ namespace TreeBeard.Outputs
     {
         private IOutput _output;
 
-        public void Execute(IEvent value)
+        public void Execute(Event value)
         {
             _output.Execute(value);
         }

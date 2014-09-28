@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using TreeBeard.Extensions;
+using TreeBeard.Events;
 using TreeBeard.Interfaces;
-using TreeBeard.Scripts.Filters;
 
 namespace TreeBeard.Gui.Views
 {
@@ -17,11 +16,11 @@ namespace TreeBeard.Gui.Views
         {
             uclConsole.Clear();
 
-            IEvent value = uclEventInput.GetEvent();
+            Event value = uclEventInput.GetEvent();
             IFilter filter = uclFilter.GetFilter();
             if (filter != null)
             {
-                IEvent result = filter.Execute(value);
+                Event result = filter.Execute(value);
                 if (result == null)
                 {
                     Console.WriteLine("Event dropped");
