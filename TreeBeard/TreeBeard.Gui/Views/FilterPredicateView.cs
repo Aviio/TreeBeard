@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using TreeBeard.Events;
-using TreeBeard.ExtensionMethods;
+using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Views

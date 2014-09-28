@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreeBeard.Exceptions;
@@ -16,8 +17,11 @@ namespace TreeBeard
             // check configuration validity
             if (!IsConfigurationValid(configuration)) throw new InvalidConfigurationException(configuration);
 
-            // set keystore location
-            KeyStore.SetLocation(configuration.KeyStoreLocation);
+            // initialize logging
+            //Log4NetLog.Initialize();
+
+            // initialize keystore
+            KeyStore.Initialize(configuration.KeyStoreLocation);
 
             // create pipeline
             _pipeline = new Pipeline<IEvent>(

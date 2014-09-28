@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Reactive.Linq;
-using TreeBeard.Utils;
+using TreeBeard.Extensions;
 
-namespace TreeBeard.ExtensionMethods
+namespace TreeBeard.Extensions
 {
     public static class ObservableExtensions
     {
         public static IObservable<TSource> Trace<TSource>(this IObservable<TSource> source, string name)
         {
-            if (!Log.IsDebug()) return source;
-
             return Observable.Create<TSource>(observer =>
             {
-                Action<string, object> trace = (m, v) => Log.Information(name, m, v);
+                Action<string, object> trace = (m, v) => observer.Log().Info("[{0}] {1}({2})", name, m, v);
 
                 trace("Subscribe", null);
                 IDisposable disposable = source.Subscribe(

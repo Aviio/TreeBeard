@@ -3,7 +3,7 @@ using CSScriptLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using TreeBeard.ExtensionMethods;
+using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Utils

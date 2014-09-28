@@ -78,7 +78,7 @@ public class MongoDbInput : AbstractInputWithPosition<BsonValue>
         }
 
         private static DateTime GetTimeStamp(BsonDocument document)
-        {     
+        {
             var objectId = document["_id"] as BsonObjectId;
             return (objectId != null) ? objectId.Value.CreationTime : DateTime.Now;
         }

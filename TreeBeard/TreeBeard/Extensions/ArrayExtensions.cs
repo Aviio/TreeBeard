@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TreeBeard.ExtensionMethods
+namespace TreeBeard.Extensions
 {
     public static class ArrayExtensions
     {

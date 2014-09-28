@@ -1,7 +1,7 @@
 ﻿
 using System;
 using TreeBeard.Events;
-using TreeBeard.ExtensionMethods;
+using TreeBeard.Extensions;
 using TreeBeard.Utils;
 using TreeBeard.Interfaces;
 
