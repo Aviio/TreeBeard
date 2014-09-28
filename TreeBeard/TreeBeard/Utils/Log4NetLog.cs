@@ -41,11 +41,6 @@ namespace TreeBeard.Utils
             _logger = LogManager.GetLogger(loggerName);
         }
 
-        public static void Initialize()
-        {
-            XmlConfigurator.Configure();
-        }
-
         public bool IsDebugEnabled()
         {
             return _logger.IsDebugEnabled;
