@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using TreeBeard.Extensions;
 
 namespace TreeBeard.Utils
 {
-    public class Pipeline<T> : IDisposable
+    internal class Pipeline<T> : IDisposable
     {
         private event EventHandler<EventArgs> _event;
         private readonly List<IDisposable> _inputSubscriptions = new List<IDisposable>();
@@ -37,27 +38,17 @@ namespace TreeBeard.Utils
 
         private void Filter(IEnumerable<KeyValuePair<Func<T, bool>, Func<T, T>>> filters, T value)
         {
-            //Log.Information("Filter", "Input", value.AsString());
-            //int i = 0;
             foreach (KeyValuePair<Func<T, bool>, Func<T, T>> filter in filters)
             {
-                //string logName = "Filter" + (++i).ToString();
                 if ((filter.Key != null) ? filter.Key(value) : true)
                 {
                     value = filter.Value(value);
                     if (value == null)
                     {
-                        //Log.Information(logName, "Drop", null);
                         return;
                     }
-                    //Log.Information(logName, "Intermediate", value.AsString());
                 }
-                //else
-                //{
-                //    Log.Information(logName, "Ignored", value.AsString());
-                //}
             }
-            //Log.Information("Filter", "Output", value.AsString());
             _event(this, new EventArgs(value));
         }
 

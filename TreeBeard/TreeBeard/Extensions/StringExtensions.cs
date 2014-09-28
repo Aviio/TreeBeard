@@ -5,7 +5,7 @@ using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
-namespace TreeBeard.ExtensionMethods
+namespace TreeBeard.Extensions
 {
     public static class StringExtensions
     {

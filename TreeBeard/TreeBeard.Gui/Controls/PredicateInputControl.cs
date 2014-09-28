@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using TreeBeard.ExtensionMethods;
+using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Controls

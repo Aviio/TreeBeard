@@ -1,5 +1,5 @@
 ﻿using System;
-using TreeBeard.ExtensionMethods;
+using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
 using TreeBeard.Utils;
 
