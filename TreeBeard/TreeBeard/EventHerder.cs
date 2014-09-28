@@ -17,9 +17,6 @@ namespace TreeBeard
             // check configuration validity
             if (!IsConfigurationValid(configuration)) throw new InvalidConfigurationException(configuration);
 
-            // initialize logging
-            //Log4NetLog.Initialize();
-
             // initialize keystore
             KeyStore.Initialize(configuration.KeyStoreLocation);
 
