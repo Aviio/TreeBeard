@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\FluentConfiguration.cs" />
+    <Compile Include="Exceptions\InvalidConfigurationException.cs" />
     <Compile Include="ExtensionMethods\ArrayExtensions.cs" />
     <Compile Include="ExtensionMethods\ObservableExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="Exceptions\TypeConstructionException.cs" />
     <Compile Include="Filters\ConfigurationFilter.cs" />
     <Compile Include="Interfaces\IInitializable.cs" />
-    <Compile Include="Interfaces\IEventHerder.cs" />
     <Compile Include="Inputs\ConfigurationInput.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
@@ -88,9 +88,9 @@
     <Compile Include="Scripts\Inputs\MongoDbInput.cs" />
     <Compile Include="Scripts\Inputs\SqlServerInput.cs" />
     <Compile Include="Scripts\Outputs\ConsoleInput.cs" />
+    <Compile Include="Utils\Pipeline.cs" />
     <Compile Include="Utils\KeyStore.cs" />
     <Compile Include="Utils\Log.cs" />
-    <Compile Include="Utils\OutputEventArgs.cs" />
     <Compile Include="Outputs\ConfigurationOutput.cs" />
     <Compile Include="Interfaces\IOutput.cs" />
     <Compile Include="Interfaces\IInput.cs" />
