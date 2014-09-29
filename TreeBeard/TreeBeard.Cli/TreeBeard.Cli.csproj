@@ -48,10 +48,10 @@
     <None Include="..\TreeBeard.Plugins\Copy-TreeBeardPlugins.ps1">
       <Link>Copy-TreeBeardPlugins.ps1</Link>
     </None>
+    <None Include="..\TreeBeard\Configuration\example.json">
+      <Link>example.json</Link>
+    </None>
     <None Include="App.config" />
-    <Content Include="Configuration\example.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TreeBeard\TreeBeard.csproj">

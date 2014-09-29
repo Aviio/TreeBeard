@@ -25,5 +25,11 @@ namespace TreeBeard.Filters
         {
             _filter = args[0].ConstructFilter(args[1], args.SubArray(2));
         }
+
+        public override void Dispose()
+        {
+            if (_filter != null) _filter.Dispose();
+            base.Dispose();
+        }
     }
 }

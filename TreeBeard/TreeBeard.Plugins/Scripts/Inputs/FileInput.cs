@@ -7,7 +7,7 @@ using System.Reactive.Linq;
 using TreeBeard;
 using TreeBeard.Inputs;
 
-public class FileInput : AbstractInputWithPosition<long>
+public class FileInput : AbstractInputWithPosition<long>, IDisposable
 {
     private string _fileName;
     private FileSystemWatcher _watcher;
@@ -24,6 +24,12 @@ public class FileInput : AbstractInputWithPosition<long>
     public override void Initialize(params string[] args)
     {
         _fileName = args[0];
+    }
+
+    public override void Dispose()
+    {
+        if (_watcher != null) _watcher.Dispose();
+        base.Dispose();
     }
 
     private void Initialize()

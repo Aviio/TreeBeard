@@ -1,9 +1,10 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace TreeBeard.Interfaces
 {
-    public interface IConfiguration
+    public interface IConfiguration : IDisposable
     {
         string KeyStoreLocation { get; }
         List<IInput> Inputs { get; }

@@ -9,5 +9,7 @@ namespace TreeBeard.Filters
 
         public abstract Event Execute(Event value);
         public abstract void Initialize(params string[] args);
+
+        public virtual void Dispose() { }
     }
 }

@@ -1,15 +1,15 @@
 ﻿using System;
 using TreeBeard;
-using TreeBeard.Interfaces;
+using TreeBeard.Outputs;
 
-public class ConsoleOutput : IOutput
+public class ConsoleOutput : AbstractOutput
 {
-    public void Execute(Event value)
+    public override void Execute(Event value)
     {
         Console.WriteLine(value.AsString());
     }
 
-    public void Initialize(params string[] args)
+    public override void Initialize(params string[] args)
     {
     }
 }

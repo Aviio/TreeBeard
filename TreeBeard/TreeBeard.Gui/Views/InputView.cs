@@ -7,6 +7,7 @@ namespace TreeBeard.Gui.Views
     public partial class InputView : UserControl
     {
         IDisposable _subscription;
+        IInput _input;
 
         public InputView()
         {
@@ -24,11 +25,11 @@ namespace TreeBeard.Gui.Views
         {
             uclConsole.Clear();
 
-            IInput input = uclInput.GetInput();
-            if (input != null)
+            _input = uclInput.GetInput();
+            if (_input != null)
             {
                 Console.WriteLine("Starting...");
-                Subscribe(input.Execute(), OutputToConsole);
+                Subscribe(_input.Execute(), OutputToConsole);
                 Console.WriteLine("Started");
             }
         }
@@ -52,10 +53,8 @@ namespace TreeBeard.Gui.Views
 
         private void OnDisposed()
         {
-            if (_subscription != null)
-            {
-                _subscription.Dispose();
-            }
+            if (_subscription != null) _subscription.Dispose();
+            if (_input != null) _input.Dispose();
         }
 
         private void gbxMain_Resize(object sender, EventArgs e)

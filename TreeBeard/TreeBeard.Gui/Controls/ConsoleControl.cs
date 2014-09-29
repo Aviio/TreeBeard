@@ -7,7 +7,7 @@ namespace TreeBeard.Gui.Controls
 {
     public partial class ConsoleControl : UserControl
     {
-        TextWriter _writer = null;
+        TextWriter _writer;
 
         public ConsoleControl()
         {
@@ -20,6 +20,20 @@ namespace TreeBeard.Gui.Controls
         public void Clear()
         {
             txtConsole.Clear();
+        }
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (_writer != null) _writer.Dispose();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 

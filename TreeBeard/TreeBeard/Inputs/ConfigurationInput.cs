@@ -29,5 +29,11 @@ namespace TreeBeard.Inputs
         {
             _input = args[0].ConstructInput(args[1], args.SubArray(2));
         }
+
+        public override void Dispose()
+        {
+            if (_input != null) _input.Dispose();
+            base.Dispose();
+        }
     }
 }

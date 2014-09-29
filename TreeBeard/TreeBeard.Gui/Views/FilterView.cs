@@ -16,17 +16,19 @@ namespace TreeBeard.Gui.Views
             uclConsole.Clear();
 
             Event value = uclEventInput.GetEvent();
-            IFilter filter = uclFilter.GetFilter();
-            if (filter != null)
+            using (IFilter filter = uclFilter.GetFilter())
             {
-                Event result = filter.Execute(value);
-                if (result == null)
+                if (filter != null)
                 {
-                    Console.WriteLine("Event dropped");
-                }
-                else
-                {
-                    Console.WriteLine(result.AsString());
+                    Event result = filter.Execute(value);
+                    if (result == null)
+                    {
+                        Console.WriteLine("Event dropped");
+                    }
+                    else
+                    {
+                        Console.WriteLine(result.AsString());
+                    }
                 }
             }
         }

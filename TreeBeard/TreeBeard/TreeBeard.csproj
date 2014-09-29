@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AbstractConfiguration.cs" />
     <Compile Include="Configuration\FluentConfiguration.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Exceptions\InvalidConfigurationException.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Log4NetLog.cs" />
+    <Compile Include="Outputs\AbstractOutput.cs" />
     <Compile Include="Pipeline.cs" />
     <Compile Include="KeyStore.cs" />
     <Compile Include="Outputs\ConfigurationOutput.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Interfaces\IInput.cs" />
     <Compile Include="EventHerder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Configuration\example.json" />
     <None Include="Extensions\Dynamic Expressions.html" />
   </ItemGroup>
   <ItemGroup>

@@ -7,13 +7,8 @@ using TreeBeard.Outputs;
 
 namespace TreeBeard.Configuration
 {
-    public class FluentConfiguration : IConfiguration
+    public class FluentConfiguration : AbstractConfiguration
     {
-        public string KeyStoreLocation { get; set; }
-        public List<IInput> Inputs { get; set; }
-        public List<IFilter> Filters { get; set; }
-        public List<IOutput> Outputs { get; set; }
-
         public FluentConfiguration(string keyStoreLocation)
         {
             KeyStoreLocation = keyStoreLocation;

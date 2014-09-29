@@ -11,9 +11,12 @@ namespace TreeBeard
     public class EventHerder : IDisposable
     {
         private readonly IDisposable _pipeline;
+        private readonly IDisposable _configuration;
 
         public EventHerder(IConfiguration configuration)
         {
+            _configuration = configuration;
+
             // check configuration validity
             if (!IsConfigurationValid(configuration)) throw new InvalidConfigurationException(configuration);
 
@@ -36,6 +39,7 @@ namespace TreeBeard
         public void Dispose()
         {
             if (_pipeline != null) _pipeline.Dispose();
+            if (_configuration != null) _configuration.Dispose();
         }
 
         private bool IsConfigurationValid(IConfiguration configuration)

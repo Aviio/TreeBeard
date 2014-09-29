@@ -16,10 +16,9 @@ namespace TreeBeard.Gui.Views
             uclConsole.Clear();
 
             Event value = uclEventInput.GetEvent();
-            IOutput output = uclOutput.GetOutput();
-            if (output != null)
+            using (IOutput output = uclOutput.GetOutput())
             {
-                output.Execute(value);
+                if (output != null) output.Execute(value);
             }
         }
 

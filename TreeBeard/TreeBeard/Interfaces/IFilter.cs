@@ -3,7 +3,7 @@ using System;
 
 namespace TreeBeard.Interfaces
 {
-    public interface IFilter : IInitializable
+    public interface IFilter : IInitializable, IDisposable
     {
         Func<Event, bool> Predicate { get; set; }
 
