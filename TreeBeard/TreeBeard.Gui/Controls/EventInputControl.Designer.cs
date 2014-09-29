@@ -28,31 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dtpTimeStamp = new System.Windows.Forms.DateTimePicker();
-            this.txtMessage = new System.Windows.Forms.TextBox();
+            this.txtDynamic = new System.Windows.Forms.TextBox();
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtType = new System.Windows.Forms.TextBox();
-            this.lblMessage = new System.Windows.Forms.Label();
+            this.lblDynamic = new System.Windows.Forms.Label();
             this.lblTimeStamp = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
+            this.ttiDynamic = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // dtpTimeStamp
             // 
+            this.dtpTimeStamp.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            this.dtpTimeStamp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTimeStamp.Location = new System.Drawing.Point(72, 55);
             this.dtpTimeStamp.Name = "dtpTimeStamp";
-            this.dtpTimeStamp.Size = new System.Drawing.Size(200, 20);
+            this.dtpTimeStamp.Size = new System.Drawing.Size(150, 20);
             this.dtpTimeStamp.TabIndex = 8;
             // 
-            // txtMessage
+            // txtDynamic
             // 
-            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtDynamic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.Location = new System.Drawing.Point(72, 81);
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(457, 20);
-            this.txtMessage.TabIndex = 10;
+            this.txtDynamic.Location = new System.Drawing.Point(72, 81);
+            this.txtDynamic.Name = "txtDynamic";
+            this.txtDynamic.Size = new System.Drawing.Size(457, 20);
+            this.txtDynamic.TabIndex = 10;
+            this.ttiDynamic.SetToolTip(this.txtDynamic, "{\"foo\":\"bar\",\"int\":123,\"date\":\"2012-04-23T18:25:43.511Z\"}");
             // 
             // txtId
             // 
@@ -72,14 +77,14 @@
             this.txtType.Size = new System.Drawing.Size(457, 20);
             this.txtType.TabIndex = 5;
             // 
-            // lblMessage
+            // lblDynamic
             // 
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.Location = new System.Drawing.Point(3, 84);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(53, 13);
-            this.lblMessage.TabIndex = 12;
-            this.lblMessage.Text = "Message:";
+            this.lblDynamic.AutoSize = true;
+            this.lblDynamic.Location = new System.Drawing.Point(3, 84);
+            this.lblDynamic.Name = "lblDynamic";
+            this.lblDynamic.Size = new System.Drawing.Size(51, 13);
+            this.lblDynamic.TabIndex = 12;
+            this.lblDynamic.Text = "Dynamic:";
             // 
             // lblTimeStamp
             // 
@@ -108,15 +113,25 @@
             this.lblType.TabIndex = 7;
             this.lblType.Text = "Type:";
             // 
+            // ttiDynamic
+            // 
+            this.ttiDynamic.AutomaticDelay = 10;
+            this.ttiDynamic.AutoPopDelay = 100000;
+            this.ttiDynamic.InitialDelay = 10;
+            this.ttiDynamic.ReshowDelay = 2;
+            this.ttiDynamic.ShowAlways = true;
+            this.ttiDynamic.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.ttiDynamic.ToolTipTitle = "Example";
+            // 
             // EventInputControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dtpTimeStamp);
-            this.Controls.Add(this.txtMessage);
+            this.Controls.Add(this.txtDynamic);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.txtType);
-            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.lblDynamic);
             this.Controls.Add(this.lblTimeStamp);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.lblType);
@@ -130,12 +145,13 @@
         #endregion
 
         private System.Windows.Forms.DateTimePicker dtpTimeStamp;
-        private System.Windows.Forms.TextBox txtMessage;
+        private System.Windows.Forms.TextBox txtDynamic;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtType;
-        private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Label lblDynamic;
         private System.Windows.Forms.Label lblTimeStamp;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.ToolTip ttiDynamic;
     }
 }

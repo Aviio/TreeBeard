@@ -1,12 +1,13 @@
-﻿using System.Windows.Forms;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Gui.Controls
 {
     public partial class EventInputControl : UserControl
     {
-        // TODO need to provide method of entering dynamic content
-
         public EventInputControl()
         {
             InitializeComponent();
@@ -14,8 +15,24 @@ namespace TreeBeard.Gui.Controls
 
         public Event GetEvent()
         {
-            dynamic ev = new Event(txtType.Text, txtId.Text, dtpTimeStamp.Value);
-            ev.Message = txtMessage.Text;
+            Event ev = new Event(txtType.Text, txtId.Text, dtpTimeStamp.Value);
+
+            try
+            {
+                var dynamicValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(txtDynamic.Text);
+                if (dynamicValues != null)
+                {
+                    foreach (var v in dynamicValues)
+                    {
+                        ev.SetMember(v.Key, v.Value);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
             return ev;
         }
     }
