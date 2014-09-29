@@ -1,7 +1,7 @@
 ﻿
 using BinaryRage;
 
-namespace TreeBeard.Utils
+namespace TreeBeard
 {
     public static class KeyStore
     {

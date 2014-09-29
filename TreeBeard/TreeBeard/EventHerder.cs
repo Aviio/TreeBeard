@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TreeBeard.Events;
 using TreeBeard.Exceptions;
+using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
-using TreeBeard.Utils;
 
 namespace TreeBeard
 {
@@ -30,7 +29,7 @@ namespace TreeBeard
         }
 
         public EventHerder(Type configurationType, params object[] args)
-            : this(ReflectionUtils.Construct(configurationType, args) as IConfiguration)
+            : this(configurationType.Construct(args) as IConfiguration)
         {
         }
 

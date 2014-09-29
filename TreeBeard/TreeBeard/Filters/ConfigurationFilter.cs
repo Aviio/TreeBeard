@@ -1,8 +1,6 @@
 ﻿using System;
-using TreeBeard.Events;
 using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
-using TreeBeard.Utils;
 
 namespace TreeBeard.Filters
 {
@@ -25,7 +23,7 @@ namespace TreeBeard.Filters
 
         public override void Initialize(params string[] args)
         {
-            _filter = ScriptUtils.ConstructFilter(args[0], args[1], args.SubArray(2));
+            _filter = args[0].ConstructFilter(args[1], args.SubArray(2));
         }
     }
 }

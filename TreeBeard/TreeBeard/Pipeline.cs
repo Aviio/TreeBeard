@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using TreeBeard.Extensions;
 
-namespace TreeBeard.Utils
+namespace TreeBeard
 {
     internal class Pipeline<T> : IDisposable
     {

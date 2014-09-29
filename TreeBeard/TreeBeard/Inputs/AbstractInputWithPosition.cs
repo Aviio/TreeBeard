@@ -1,5 +1,4 @@
-﻿using TreeBeard.Utils;
-
+﻿
 namespace TreeBeard.Inputs
 {
     public abstract class AbstractInputWithPosition<T> : AbstractInput

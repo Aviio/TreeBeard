@@ -27,7 +27,7 @@ using System;
 using System.Globalization;
 using System.Runtime;
 
-namespace TreeBeard.Utils
+namespace TreeBeard
 {
     public sealed class Log4NetLog
     {

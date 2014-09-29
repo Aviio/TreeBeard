@@ -1,8 +1,6 @@
 ﻿using System;
-using TreeBeard.Events;
 using TreeBeard.Extensions;
 using TreeBeard.Interfaces;
-using TreeBeard.Utils;
 
 namespace TreeBeard.Inputs
 {
@@ -29,7 +27,7 @@ namespace TreeBeard.Inputs
 
         public override void Initialize(params string[] args)
         {
-            _input = ScriptUtils.ConstructInput(args[0], args[1], args.SubArray(2));
+            _input = args[0].ConstructInput(args[1], args.SubArray(2));
         }
     }
 }

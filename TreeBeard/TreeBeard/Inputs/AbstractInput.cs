@@ -1,7 +1,5 @@
 ﻿using System;
-using TreeBeard.Events;
 using TreeBeard.Interfaces;
-using TreeBeard.Utils;
 
 namespace TreeBeard.Inputs
 {

@@ -1,7 +1,4 @@
-﻿using TreeBeard.Events;
-using TreeBeard.Inputs;
-using TreeBeard.Interfaces;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
@@ -9,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using TreeBeard;
+using TreeBeard.Inputs;
 
 public class MongoDbInput : AbstractInputWithPosition<BsonValue>
 {

@@ -7,9 +7,12 @@ TreeBeard/TreeBeard.Gui/obj/
 TreeBeard/TreeBeard.Gui/bin/
 TreeBeard/TreeBeard.Tests/obj/
 TreeBeard/TreeBeard.Tests/bin/
+TreeBeard/TreeBeard.Service/obj/
+TreeBeard/TreeBeard.Service/bin/
+TreeBeard/TreeBeard.Plugins/obj/
+TreeBeard/TreeBeard.Plugins/bin/
 TreeBeard/TreeBeard/obj/
 TreeBeard/TreeBeard/bin/
-TreeBeard/System.Linq.Dynamic/obj/
-TreeBeard/System.Linq.Dynamic/bin/
+TreeBeard/System.Linq.Dynamic/
 TreeBeard/packages/
 *.user

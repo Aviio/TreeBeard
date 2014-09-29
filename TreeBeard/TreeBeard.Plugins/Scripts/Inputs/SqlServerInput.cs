@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reactive.Linq;
-using TreeBeard.Events;
+using TreeBeard;
 using TreeBeard.Inputs;
-using TreeBeard.Interfaces;
 
 public class SqlServerInput : AbstractInputWithPosition<int>
 {

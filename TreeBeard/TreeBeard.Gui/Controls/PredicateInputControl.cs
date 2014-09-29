@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using TreeBeard.Events;
 using TreeBeard.Extensions;
 
 namespace TreeBeard.Gui.Controls

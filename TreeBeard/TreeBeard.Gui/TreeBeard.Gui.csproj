@@ -160,6 +160,9 @@
     <EmbeddedResource Include="Views\OutputView.resx">
       <DependentUpon>OutputView.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\TreeBeard.Plugins\Copy-TreeBeardPlugins.ps1">
+      <Link>Copy-TreeBeardPlugins.ps1</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -181,6 +184,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -ExecutionPolicy "RemoteSigned" -NonInteractive -File "$(SolutionDir)TreeBeard.Plugins\Copy-TreeBeardPlugins.ps1" -Source "$(SolutionDir)TreeBeard.Plugins" -Destination "$(TargetDir)\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

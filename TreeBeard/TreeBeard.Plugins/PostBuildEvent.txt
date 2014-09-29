@@ -1,0 +1,1 @@
+﻿powershell -ExecutionPolicy "RemoteSigned" -NonInteractive -File "$(SolutionDir)TreeBeard.Plugins\Copy-TreeBeardPlugins.ps1" -Source "$(SolutionDir)TreeBeard.Plugins" -Destination "$(TargetDir)\"

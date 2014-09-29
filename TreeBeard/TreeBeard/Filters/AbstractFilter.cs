@@ -1,5 +1,4 @@
 ﻿using System;
-using TreeBeard.Events;
 using TreeBeard.Interfaces;
 
 namespace TreeBeard.Filters
