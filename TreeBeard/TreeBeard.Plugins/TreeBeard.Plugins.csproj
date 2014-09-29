@@ -77,6 +77,9 @@
   <ItemGroup>
     <None Include="Copy-TreeBeardPlugins.ps1" />
     <None Include="packages.config" />
+    <None Include="Templates\Custom Filter.zip" />
+    <None Include="Templates\Custom Input.zip" />
+    <None Include="Templates\Custom Output.zip" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TreeBeard\TreeBeard.csproj">
@@ -84,9 +87,7 @@
       <Name>TreeBeard</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Templates\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
