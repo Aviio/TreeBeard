@@ -62,12 +62,6 @@
       <Link>example.json</Link>
     </None>
     <None Include="App.config" />
-    <Content Include="install.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="uninstall.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TreeBeard\TreeBeard.csproj">

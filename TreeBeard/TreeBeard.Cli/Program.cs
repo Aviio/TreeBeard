@@ -9,8 +9,8 @@ namespace TreeBeard.Cli
     {
         static void Main(string[] args)
         {
-#if DEBUG
-            IConfiguration configuration;
+#if DEBUG      
+            IConfiguration configuration; // = new JsonConfiguration("test.json");
             if (args.Length == 1)
             {
                 configuration = new JsonConfiguration(args[0]);

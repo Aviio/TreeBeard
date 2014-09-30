@@ -20,7 +20,9 @@ namespace TreeBeard.Gui.Views
                 Event value = uclEventInput.GetEvent();
                 using (IOutput output = uclOutput.GetOutput())
                 {
+                    Console.WriteLine("Executing...");
                     if (output != null) output.Execute(value);
+                    Console.WriteLine("Executed");
                 }
             }
             catch (Exception ex)

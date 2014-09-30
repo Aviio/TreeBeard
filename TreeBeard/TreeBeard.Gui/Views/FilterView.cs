@@ -22,6 +22,7 @@ namespace TreeBeard.Gui.Views
                 {
                     if (filter != null)
                     {
+                        Console.WriteLine("Filtering...");
                         Event result = filter.Execute(value);
                         if (result == null)
                         {

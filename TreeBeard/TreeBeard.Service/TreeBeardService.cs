@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.ServiceProcess;
 using TreeBeard.Configuration;
 
@@ -19,6 +20,8 @@ namespace TreeBeard.Service
 
         protected override void OnStart(string[] args)
         {
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+
             string configLocation = ConfigurationManager.AppSettings["jsonConfigurationFileLocation"];
 
             _eventHerder = new EventHerder(typeof(JsonConfiguration), configLocation);
