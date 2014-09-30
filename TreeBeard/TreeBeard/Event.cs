@@ -14,7 +14,6 @@ namespace TreeBeard
         private Dictionary<string, object> _dictionary = new Dictionary<string, object>();
         private string _eventAlias;
 
-
         public string EventType { get; set; }
         public string EventAlias {
             get { return (!string.IsNullOrEmpty(_eventAlias)) ? _eventAlias : EventType; }

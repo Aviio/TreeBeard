@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl4 = new System.Windows.Forms.Label();
             this.txtArgs = new System.Windows.Forms.TextBox();
             this.lbl2 = new System.Windows.Forms.Label();
@@ -35,13 +36,15 @@
             this.lbl1 = new System.Windows.Forms.Label();
             this.lbl3 = new System.Windows.Forms.Label();
             this.txtAlias = new System.Windows.Forms.TextBox();
+            this.ttiDynamic = new System.Windows.Forms.ToolTip(this.components);
+            this.chkUseScript = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbl4
             // 
             this.lbl4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl4.AutoSize = true;
-            this.lbl4.Location = new System.Drawing.Point(796, 6);
+            this.lbl4.Location = new System.Drawing.Point(775, 6);
             this.lbl4.Name = "lbl4";
             this.lbl4.Size = new System.Drawing.Size(17, 13);
             this.lbl4.TabIndex = 14;
@@ -53,7 +56,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtArgs.Location = new System.Drawing.Point(384, 3);
             this.txtArgs.Name = "txtArgs";
-            this.txtArgs.Size = new System.Drawing.Size(406, 20);
+            this.txtArgs.Size = new System.Drawing.Size(385, 20);
             this.txtArgs.TabIndex = 13;
             // 
             // lbl2
@@ -97,10 +100,33 @@
             this.txtAlias.Size = new System.Drawing.Size(100, 20);
             this.txtAlias.TabIndex = 16;
             // 
+            // ttiDynamic
+            // 
+            this.ttiDynamic.AutomaticDelay = 10;
+            this.ttiDynamic.AutoPopDelay = 100000;
+            this.ttiDynamic.InitialDelay = 10;
+            this.ttiDynamic.ReshowDelay = 2;
+            this.ttiDynamic.ShowAlways = true;
+            this.ttiDynamic.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.ttiDynamic.ToolTipTitle = "Example";
+            // 
+            // chkUseScript
+            // 
+            this.chkUseScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkUseScript.AutoSize = true;
+            this.chkUseScript.Location = new System.Drawing.Point(798, 6);
+            this.chkUseScript.Name = "chkUseScript";
+            this.chkUseScript.Size = new System.Drawing.Size(15, 14);
+            this.chkUseScript.TabIndex = 17;
+            this.ttiDynamic.SetToolTip(this.chkUseScript, "If checked use script (as deployed), else use TreeBeard.Plugins.dll (allows debug" +
+        "ging)");
+            this.chkUseScript.UseVisualStyleBackColor = true;
+            // 
             // InputControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkUseScript);
             this.Controls.Add(this.txtAlias);
             this.Controls.Add(this.lbl3);
             this.Controls.Add(this.lbl4);
@@ -124,5 +150,7 @@
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Label lbl3;
         private System.Windows.Forms.TextBox txtAlias;
+        private System.Windows.Forms.ToolTip ttiDynamic;
+        private System.Windows.Forms.CheckBox chkUseScript;
     }
 }

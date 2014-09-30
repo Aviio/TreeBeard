@@ -8,22 +8,25 @@ using TreeBeard.Inputs;
 
 public class SqlServerInput : AbstractInputWithPosition<int>
 {
-    private string _table;
     private string _idColumn;
     private string _timeStampColumn;
     private string _connectionString;
+    private string _queryEventsString;
+    private string _queryLastIdString;
 
     public override void Initialize(params string[] args)
     {
         string uri = args[0];
         string database = args[1];
+        string table = args[2];
         string userName = (args.Length > 5) ? args[5] : string.Empty;
         string password = (args.Length > 6) ? args[6] : string.Empty;
-        _connectionString = GetConnectionString(uri, database, userName, password);
 
-        _table = args[2];
         _idColumn = args[3];
         _timeStampColumn = args[4];
+        _connectionString = GetConnectionString(uri, database, userName, password);
+        _queryEventsString = string.Format("SELECT * FROM {0} WHERE {1} > @0 ORDER BY {1} DESC", table, _idColumn);
+        _queryLastIdString = string.Format("SELECT MAX({0}) FROM {1}", _idColumn, table);
 
         InitPosition(GetLastId());
     }
@@ -37,12 +40,10 @@ public class SqlServerInput : AbstractInputWithPosition<int>
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Open();
-            string sql = string.Format("SELECT * FROM {0} WHERE {1} > @0 ORDER BY {1} DESC", _table, _idColumn);
-            using (SqlCommand command = new SqlCommand(sql, connection))
+            using (SqlCommand command = new SqlCommand(_queryEventsString, connection))
             {
                 command.Parameters.Add("@0", SqlDbType.Int).Value = GetPosition();
-
+                connection.Open();
                 using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {
                     DataTable dataTable = new DataTable();
@@ -67,6 +68,18 @@ public class SqlServerInput : AbstractInputWithPosition<int>
         }
     }
 
+    private int GetLastId()
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(_queryLastIdString, connection))
+            {
+                connection.Open();
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+        }
+    }
+
     private string GetConnectionString(string uri, string database, string userName = null, string password = "")
     {
         string connectionString = string.Format("Data Source={0};Initial Catalog={1};", uri, database);
@@ -79,18 +92,5 @@ public class SqlServerInput : AbstractInputWithPosition<int>
             connectionString += string.Format("User id={0};Password={1}", userName, password);
         }
         return connectionString;
-    }
-
-    private int GetLastId()
-    {
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-            string sql = string.Format("SELECT MAX({0}) FROM {1}", _idColumn, _table);
-            using (SqlCommand command = new SqlCommand(sql, connection))
-            {
-                return Convert.ToInt32(command.ExecuteScalar());
-            }
-        }
     }
 }

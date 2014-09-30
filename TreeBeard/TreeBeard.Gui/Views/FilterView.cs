@@ -15,21 +15,28 @@ namespace TreeBeard.Gui.Views
         {
             uclConsole.Clear();
 
-            Event value = uclEventInput.GetEvent();
-            using (IFilter filter = uclFilter.GetFilter())
+            try
             {
-                if (filter != null)
+                Event value = uclEventInput.GetEvent();
+                using (IFilter filter = uclFilter.GetFilter())
                 {
-                    Event result = filter.Execute(value);
-                    if (result == null)
+                    if (filter != null)
                     {
-                        Console.WriteLine("Event dropped");
-                    }
-                    else
-                    {
-                        Console.WriteLine(result.AsString());
+                        Event result = filter.Execute(value);
+                        if (result == null)
+                        {
+                            Console.WriteLine("Event dropped");
+                        }
+                        else
+                        {
+                            Console.WriteLine(result.AsString());
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

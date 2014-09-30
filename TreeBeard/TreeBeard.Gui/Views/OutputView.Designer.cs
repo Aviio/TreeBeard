@@ -63,7 +63,6 @@
             this.uclConsole.Name = "uclConsole";
             this.uclConsole.Size = new System.Drawing.Size(562, 102);
             this.uclConsole.TabIndex = 4;
-            this.uclConsole.Load += new System.EventHandler(this.uclConsole_Load);
             // 
             // btnExecute
             // 

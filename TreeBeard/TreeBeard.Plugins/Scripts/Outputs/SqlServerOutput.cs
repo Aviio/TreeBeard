@@ -5,65 +5,51 @@ using TreeBeard.Outputs;
 
 public class SqlServerOutput : AbstractOutput
 {
-    private string _uri;
-    private string _database;
-    private string _table;
-    private string _userName;
-    private string _password;
+    private string _connectionString;
+    private string _queryString;
 
     public override void Execute(Event value)
     {
-        using (SqlConnection connection = GetConnection())
+        using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            //TABLE SCHEMA TREEBEARDDEV: ID | TYPEID | TYPE | TIMESTAMP | XML
+            using (SqlCommand command = new SqlCommand(_queryString, connection))
+            {
+                command.Parameters.AddWithValue("@type", value.EventType);
+                command.Parameters.AddWithValue("@alias", value.EventAlias);
+                command.Parameters.AddWithValue("@timeStamp", value.EventTimeStamp);
+                command.Parameters.AddWithValue("@xml", value.AsXml());
 
-            var xmlResults = value.AsXml();
-            var type = value.EventType;
-            var typeId = value.EventAlias;
-            var timeStamp = value.EventTimeStamp;
-
-            var insertQuery = string.Format(@"INSERT INTO {0} (TypeId, Type, TimeStamp, XML) VALUES @typeId, @type, @timeStamp, @xml", _table);
-
-            var command = new SqlCommand(insertQuery);
-            command.Parameters.AddWithValue("@typeId", typeId);
-            command.Parameters.AddWithValue("@type", type);
-            command.Parameters.AddWithValue("@timeStamp", timeStamp);
-            command.Parameters.AddWithValue("@xml", xmlResults);
-
-            connection.Open();
-            this.Log().Info("SQL connection init");
-            command.ExecuteNonQuery();
-            command.Dispose();
-            connection.Close();
+                connection.Open();
+                this.Log().Info("SQL connection init");
+                command.ExecuteNonQuery();
+            }
         }
     }
 
     public override void Initialize(params string[] args)
     {
         this.Log().Info("Initialized SQL Server Plugin");
-        _uri = args[0];
-        _database = args[1];
-        _table = args[2];
-        if (args.Length > 2)
-        {
-            this.Log().Info("args > 2");
-            _userName = args[3];
-            _password = args[4];
-        }
+        string uri = args[0];
+        string database = args[1];
+        string userName = (args.Length > 3) ? args[3] : string.Empty;
+        string password = (args.Length > 4) ? args[4] : string.Empty;
+
+        _connectionString = GetConnectionString(uri, database, userName, password);
+        //TABLE SCHEMA: TYPE | ALIAS | TIMESTAMP | XML
+        _queryString = string.Format(@"INSERT INTO {0} (Type, Alias, TimeStamp, XML) VALUES (@type, @alias, @timeStamp, @xml)", args[2]);
     }
 
-    private SqlConnection GetConnection()
+    private string GetConnectionString(string uri, string database, string userName = null, string password = "")
     {
-        string connectionString = string.Format("Data Source={0};Initial Catalog={1};", _uri, _database);
-        if (string.IsNullOrEmpty(_userName))
+        string connectionString = string.Format("Data Source={0};Initial Catalog={1};", uri, database);
+        if (string.IsNullOrEmpty(userName))
         {
             connectionString += "Integrated Security=SSPI";
         }
         else
         {
-            connectionString += string.Format("User id={0};Password={1}", _userName, _password);
+            connectionString += string.Format("User id={0};Password={1}", userName, password);
         }
-
-        return new SqlConnection(connectionString);
+        return connectionString;
     }
 }

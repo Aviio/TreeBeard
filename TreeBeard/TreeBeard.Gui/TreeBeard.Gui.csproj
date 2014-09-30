@@ -182,6 +182,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TreeBeard.Plugins\TreeBeard.Plugins.csproj">
+      <Project>{687fd912-11ac-49c1-9d73-cc88817d6e3e}</Project>
+      <Name>TreeBeard.Plugins</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TreeBeard\TreeBeard.csproj">
       <Project>{5cecc83f-bd75-455e-9440-2cfee58edf8e}</Project>
       <Name>TreeBeard</Name>

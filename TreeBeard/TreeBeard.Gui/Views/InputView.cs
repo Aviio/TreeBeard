@@ -25,12 +25,19 @@ namespace TreeBeard.Gui.Views
         {
             uclConsole.Clear();
 
-            _input = uclInput.GetInput();
-            if (_input != null)
+            try
             {
-                Console.WriteLine("Starting...");
-                Subscribe(_input.Execute(), OutputToConsole);
-                Console.WriteLine("Started");
+                _input = uclInput.GetInput();
+                if (_input != null)
+                {
+                    Console.WriteLine("Starting...");
+                    Subscribe(_input.Execute(), OutputToConsole);
+                    Console.WriteLine("Started");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

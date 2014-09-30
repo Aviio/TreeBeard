@@ -16,25 +16,31 @@ namespace TreeBeard.Gui.Controls
 
         public IFilter GetFilter()
         {
-            try
-            {
-                List<string> fullArgs = new List<string> { txtType.Text, "" };
-                string[] args = txtArgs.Text.SplitCsv();
-                if (args != null)
-                {
-                    fullArgs.AddRange(args);
-                }
+            return (chkUseScript.Checked) ? GetFilterFromScript() : GetFilterFromDll();
+        }
 
-                ConfigurationFilter filter = new ConfigurationFilter();
-                filter.Initialize(fullArgs.ToArray());
-
-                return filter;
-            }
-            catch (Exception e)
+        private IFilter GetFilterFromScript()
+        {
+            List<string> fullArgs = new List<string> { txtType.Text, "" };
+            string[] args = txtArgs.Text.SplitCsv();
+            if (args != null)
             {
-                MessageBox.Show(e.Message);
-                return null;
+                fullArgs.AddRange(args);
             }
+
+            ConfigurationFilter filter = new ConfigurationFilter();
+            filter.Initialize(fullArgs.ToArray());
+
+            return filter;
+        }
+
+        private IFilter GetFilterFromDll()
+        {
+            Type type = Type.GetType(txtType.Text + "Filter, TreeBeard.Plugins");
+            IFilter filter = Activator.CreateInstance(type) as IFilter;
+            filter.Predicate = null;
+            filter.Initialize(txtArgs.Text.SplitCsv());
+            return filter;
         }
     }
 }

@@ -15,16 +15,18 @@ namespace TreeBeard.Gui.Views
         {
             uclConsole.Clear();
 
-            Event value = uclEventInput.GetEvent();
-            using (IOutput output = uclOutput.GetOutput())
+            try
             {
-                if (output != null) output.Execute(value);
+                Event value = uclEventInput.GetEvent();
+                using (IOutput output = uclOutput.GetOutput())
+                {
+                    if (output != null) output.Execute(value);
+                }
             }
-        }
-
-        private void uclConsole_Load(object sender, EventArgs e)
-        {
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
