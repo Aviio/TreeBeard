@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>TreeBeard by csuzw</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>TreeBeard</h1>
+        <p>logstash for .NET</p>
+        <p class="view"><a href="https://github.com/csuzw/TreeBeard">View the Project on GitHub <small>csuzw/TreeBeard</small></a></p>
+        <ul>
+          <li><a href="https://github.com/csuzw/TreeBeard/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/csuzw/TreeBeard/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/csuzw/TreeBeard">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h3>
+
+<p>Log/event management tool that resembles <a href="http://logstash.net/">logstash</a> but written entirely in C# for .NET/Windows environments.</p>
+
+<h3>
+<a name="useful-pages" class="anchor" href="#useful-pages"><span class="octicon octicon-link"></span></a>Useful pages</h3>
+
+<ul>
+<li><a href="https://github.com/csuzw/TreeBeard/wiki/Projects">Projects</a></li>
+<li><a href="https://github.com/csuzw/TreeBeard/wiki/Configuration-Types">Configuration Types</a></li>
+<li><a href="https://github.com/csuzw/TreeBeard/wiki/Plugins">Plugins</a></li>
+<li><a href="https://github.com/csuzw/TreeBeard/wiki/Filter-Predicates">Filter Predicates</a></li>
+</ul><h3>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<div class="highlight highlight-C#"><pre><span class="n">IConfiguration</span> <span class="n">configuration</span> <span class="p">=</span> <span class="k">new</span> <span class="n">JsonConfiguration</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]);</span>
+<span class="k">using</span> <span class="p">(</span><span class="n">EventHerder</span> <span class="n">eventHerder</span> <span class="p">=</span> <span class="k">new</span> <span class="n">EventHerder</span><span class="p">(</span><span class="n">configuration</span><span class="p">))</span>
+<span class="p">{</span>
+  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Press ENTER to exit..."</span><span class="p">);</span>
+  <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/csuzw">csuzw</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
