@@ -68,6 +68,8 @@
     <Compile Include="Scripts\Inputs\MongoDbInput.cs" />
     <Compile Include="Scripts\Inputs\SqlServerInput.cs" />
     <Compile Include="Scripts\Outputs\ConsoleOutput.cs" />
+    <Compile Include="Scripts\Outputs\ElasticSearchOutput.cs" />
+    <Compile Include="Scripts\Outputs\SqlServerOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\MongoDB.Bson.dll" />
