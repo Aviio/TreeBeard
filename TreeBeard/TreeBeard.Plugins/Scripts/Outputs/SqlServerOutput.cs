@@ -3,6 +3,14 @@ using TreeBeard;
 using TreeBeard.Extensions;
 using TreeBeard.Outputs;
 
+/// <summary>
+/// Write events to SqlServer table. The table must have the following columns: Type (varchar), Alias (varchar), TimeStamp (datetime), XML (xml). If username and password are not supplied, windows authentication will be applied instead.
+/// </summary>
+/// <arg name="uri" required="yes" example="127.0.0.1">URI of SQL Server instance.</arg>
+/// <arg name="database" required="yes" example="database">Database name</arg>
+/// <arg name="table" required="yes" example="table">Table name</arg>
+/// <arg name="username" required="no" example="username">Username</arg>
+/// <arg name="password" required="no" example="password">Password</arg>
 public class SqlServerOutput : AbstractOutput
 {
     private string _connectionString;

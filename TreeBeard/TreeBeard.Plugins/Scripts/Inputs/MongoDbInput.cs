@@ -9,6 +9,14 @@ using System.Reactive.Linq;
 using TreeBeard;
 using TreeBeard.Inputs;
 
+/// <summary>
+/// Read records from MongoDB collection. Collection must have _id property that increases in value. Currently works best if _id is of type BsonObjectId as exact TimeStamp can be extracted. If _id is another type, TimeStamp will be set at time TreeBeard first reads the record.
+/// </summary>
+/// <arg name="uri" required="yes" example="mongodb://localhost:27017">URI of MongoDB instance.</arg>
+/// <arg name="database" required="yes" example="database">Database name</arg>
+/// <arg name="collection" required="yes" example="collection">Collection name</arg>
+/// <dependency>MongoDB.Bson.dll</dependency>
+/// <dependency>MongoDB.Driver.dll</dependency>
 public class MongoDbInput : AbstractInputWithPosition<BsonValue>
 {
     private string _uri;

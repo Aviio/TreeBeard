@@ -3,6 +3,11 @@ using TreeBeard;
 using TreeBeard.Extensions;
 using TreeBeard.Filters;
 
+/// <summary>
+/// Updates Event.TimeStamp from specified property on Event by using a regular expression.
+/// </summary>
+/// <arg name="regEx" required="yes" example="^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}:[\d]{2}">Regular expression used to capture TimeStamp from property.</arg>
+/// <arg name="property" required="yes" example="Message">Name of property to execute regular expression against.</arg>
 public class RegExTimeStampFilter : AbstractFilter
 {
     private string _regEx;

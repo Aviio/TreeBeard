@@ -3,6 +3,11 @@ using System.IO;
 using TreeBeard;
 using TreeBeard.Outputs;
 
+/// <summary>
+/// Writes event to file.
+/// </summary>
+/// <arg name="fileName" required="yes" example="C:\log.txt">Path of log file</arg>
+/// <arg name="format" required="no" example="json">Valid options are `json` and `xml`. Anything else will output a formatted string</arg>
 public class FileOutput : AbstractOutput
 {
     private static Object Sync = new Object();

@@ -7,6 +7,10 @@ using System.Reactive.Linq;
 using TreeBeard;
 using TreeBeard.Inputs;
 
+/// <summary>
+/// Read lines from file.
+/// </summary>
+/// <arg name="fileName" required="yes" example="C:\log.txt">Full path of log file</arg>
 public class FileInput : AbstractInputWithPosition<long>, IDisposable
 {
     private string _fileName;

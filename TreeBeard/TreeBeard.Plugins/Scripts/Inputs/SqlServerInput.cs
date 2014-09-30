@@ -6,6 +6,16 @@ using System.Reactive.Linq;
 using TreeBeard;
 using TreeBeard.Inputs;
 
+/// <summary>
+/// Read records from SqlServer table. Collection must have Id column of type int that increases in value. If username and password are not supplied, windows authentication will be applied instead.
+/// </summary>
+/// <arg name="uri" required="yes" example="127.0.0.1">URI of SQL Server instance.</arg>
+/// <arg name="database" required="yes" example="database">Database name</arg>
+/// <arg name="table" required="yes" example="table">Table name</arg>
+/// <arg name="idColumn" required="yes" example="tableId">Id column name</arg>
+/// <arg name="timeStampColumn" required="yes" example="tableTimeStamp">Timestamp column name</arg>
+/// <arg name="username" required="no" example="username">Username</arg>
+/// <arg name="password" required="no" example="password">Password</arg>
 public class SqlServerInput : AbstractInputWithPosition<int>
 {
     private string _idColumn;
