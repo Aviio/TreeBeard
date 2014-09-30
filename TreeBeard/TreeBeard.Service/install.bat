@@ -1,1 +1,1 @@
-﻿InstallUtil TreeBeard.Service.exe
+﻿"%~dp0TreeBeard.Service.exe" --install

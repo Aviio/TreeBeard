@@ -8,28 +8,24 @@ using TreeBeard.Inputs;
 
 public class SqlServerInput : AbstractInputWithPosition<int>
 {
-    private string _uri;
-    private string _database;
     private string _table;
     private string _idColumn;
     private string _timeStampColumn;
-    private string _userName;
-    private string _password;
-
-    private SqlConnection _connection;
+    private string _connectionString;
 
     public override void Initialize(params string[] args)
     {
-        _uri = args[0];
-        _database = args[1];
+        string uri = args[0];
+        string database = args[1];
+        string userName = (args.Length > 5) ? args[5] : string.Empty;
+        string password = (args.Length > 6) ? args[6] : string.Empty;
+        _connectionString = GetConnectionString(uri, database, userName, password);
+
         _table = args[2];
         _idColumn = args[3];
         _timeStampColumn = args[4];
-        if (args.Length > 5)
-        {
-            _userName = args[5];
-            _password = args[6];
-        }
+
+        InitPosition(GetLastId());
     }
 
     public override IObservable<Event> Execute()
@@ -39,70 +35,62 @@ public class SqlServerInput : AbstractInputWithPosition<int>
 
     private IEnumerable<Event> GetEvents()
     {
-        if (_connection == null)
+        using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            _connection = GetConnection();
-            ClearPosition();
-        }
-        if (_connection.State == ConnectionState.Closed)
-        {
-            _connection.Open();
-            ClearPosition();
-        }
-        if (!IsPositionInitialized())
-        {
-            InitPosition(GetLastId());
-        }
-
-        string sql = string.Format("SELECT * FROM {0} WHERE {1} > @0 ORDER BY {1} DESC", _table, _idColumn);
-        using (SqlCommand command = new SqlCommand(sql, _connection))
-        {
-            command.Parameters.Add("@0", SqlDbType.Int).Value = GetPosition();
-
-            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            connection.Open();
+            string sql = string.Format("SELECT * FROM {0} WHERE {1} > @0 ORDER BY {1} DESC", _table, _idColumn);
+            using (SqlCommand command = new SqlCommand(sql, connection))
             {
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
+                command.Parameters.Add("@0", SqlDbType.Int).Value = GetPosition();
 
-                foreach (DataRow row in dataTable.Rows)
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {
-                    int position = GetPosition();
-                    dynamic ev = new Event(Type, Id);
-                    foreach (DataColumn column in dataTable.Columns)
-                    {
-                        ev.SetMember(column.ColumnName.ToLower(), row[column]);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
 
-                        if (column.ColumnName == _idColumn) position = Convert.ToInt32(row[column]);
-                        if (column.ColumnName == _timeStampColumn) ev.TimeStamp = Convert.ToDateTime(row[column]);
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        int position = GetPosition();
+                        dynamic ev = new Event(Type, Alias);
+                        foreach (DataColumn column in dataTable.Columns)
+                        {
+                            ev.SetMember(column.ColumnName.ToLower(), row[column]);
+
+                            if (column.ColumnName == _idColumn) position = Convert.ToInt32(row[column]);
+                            if (column.ColumnName == _timeStampColumn) ev.TimeStamp = Convert.ToDateTime(row[column]);
+                        }
+                        yield return ev;
+                        SetPosition(position);
                     }
-                    yield return ev;
-                    SetPosition(position);
                 }
             }
         }
     }
 
-    private SqlConnection GetConnection()
+    private string GetConnectionString(string uri, string database, string userName = null, string password = "")
     {
-        string connectionString = string.Format("Data Source={0};Initial Catalog={1};", _uri, _database);
-        if (string.IsNullOrEmpty(_userName))
+        string connectionString = string.Format("Data Source={0};Initial Catalog={1};", uri, database);
+        if (string.IsNullOrEmpty(userName))
         {
             connectionString += "Integrated Security=SSPI";
         }
         else
         {
-            connectionString += string.Format("User id={0};Password={1}", _userName, _password);
+            connectionString += string.Format("User id={0};Password={1}", userName, password);
         }
-
-        return new SqlConnection(connectionString);
+        return connectionString;
     }
 
     private int GetLastId()
     {
-        string sql = string.Format("SELECT MAX({0}) FROM {1}", _idColumn, _table);
-        using (SqlCommand command = new SqlCommand(sql, _connection))
+        using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            return Convert.ToInt32(command.ExecuteScalar());
+            connection.Open();
+            string sql = string.Format("SELECT MAX({0}) FROM {1}", _idColumn, _table);
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
         }
     }
 }

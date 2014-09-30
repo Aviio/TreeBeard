@@ -43,7 +43,7 @@ public class MongoDbInput : AbstractInputWithPosition<BsonValue>
         var query = Query.GT("_id", GetPosition());
         foreach (var document in _mongoCollection.Find(query).SetSortOrder("$natural"))
         {
-            dynamic ev = new Event(Type, Id, GetTimeStamp(document["_id"]));
+            dynamic ev = new Event(Type, Alias, GetTimeStamp(document["_id"]));
             foreach (BsonElement element in document)
             {
                 ev.SetMember(element.Name.ToLower(), element.Value.ToJson());

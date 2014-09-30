@@ -28,10 +28,10 @@ namespace TreeBeard.Gui.Controls
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (_writer != null) _writer.Dispose();
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (_writer != null) _writer.Dispose();
+                if (components != null) components.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -28,9 +28,9 @@ namespace TreeBeard.Inputs
         /// </summary>
         protected void InitPosition(T defaultValue)
         {
-            if (KeyStore.Exists(Id))
+            if (KeyStore.Exists(Alias))
             {
-                _position = KeyStore.Get<T>(Id);
+                _position = KeyStore.Get<T>(Alias);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace TreeBeard.Inputs
         protected void SetPosition(T value)
         {
             _position = value;
-            KeyStore.Insert<T>(Id, value);
+            KeyStore.Insert<T>(Alias, value);
         }
 
         /// <summary>

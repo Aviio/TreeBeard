@@ -13,7 +13,7 @@ public class RegExTimeStampFilter : AbstractFilter
         DateTime? timeStamp = value.GetMember(_property).ToString().GetTimeStamp(_regEx);
         if (timeStamp != null)
         {
-            value.TimeStamp = timeStamp.Value;
+            value.EventTimeStamp = timeStamp.Value;
         }
         return value;
     }

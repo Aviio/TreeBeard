@@ -58,7 +58,7 @@ public class FileInput : AbstractInputWithPosition<long>, IDisposable
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    dynamic ev = new Event(Type, Id);
+                    dynamic ev = new Event(Type, Alias);
                     ev.Message = line;
                     yield return ev;
                 }

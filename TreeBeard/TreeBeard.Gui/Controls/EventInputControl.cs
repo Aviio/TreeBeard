@@ -15,7 +15,7 @@ namespace TreeBeard.Gui.Controls
 
         public Event GetEvent()
         {
-            Event ev = new Event(txtType.Text, txtId.Text, dtpTimeStamp.Value);
+            Event ev = new Event(txtType.Text, txtAlias.Text, dtpTimeStamp.Value);
 
             try
             {

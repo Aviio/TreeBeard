@@ -14,9 +14,9 @@ namespace TreeBeard.Inputs
             set { throw new NotImplementedException(); }
         }
 
-        public override string Id
+        public override string Alias
         {
-            get { return (_input != null) ? _input.Id : string.Empty; }
+            get { return (_input != null) ? _input.Alias : string.Empty; }
             set { throw new NotImplementedException(); } 
         }
 

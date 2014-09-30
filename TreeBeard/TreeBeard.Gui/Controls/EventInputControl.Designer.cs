@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.dtpTimeStamp = new System.Windows.Forms.DateTimePicker();
             this.txtDynamic = new System.Windows.Forms.TextBox();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.txtAlias = new System.Windows.Forms.TextBox();
             this.txtType = new System.Windows.Forms.TextBox();
             this.lblDynamic = new System.Windows.Forms.Label();
             this.lblTimeStamp = new System.Windows.Forms.Label();
-            this.lblId = new System.Windows.Forms.Label();
+            this.lblAlias = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.ttiDynamic = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
@@ -59,14 +59,14 @@
             this.txtDynamic.TabIndex = 10;
             this.ttiDynamic.SetToolTip(this.txtDynamic, "{\"foo\":\"bar\",\"int\":123,\"date\":\"2012-04-23T18:25:43.511Z\"}");
             // 
-            // txtId
+            // txtAlias
             // 
-            this.txtId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAlias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtId.Location = new System.Drawing.Point(72, 29);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(457, 20);
-            this.txtId.TabIndex = 6;
+            this.txtAlias.Location = new System.Drawing.Point(72, 29);
+            this.txtAlias.Name = "txtAlias";
+            this.txtAlias.Size = new System.Drawing.Size(457, 20);
+            this.txtAlias.TabIndex = 6;
             // 
             // txtType
             // 
@@ -95,14 +95,14 @@
             this.lblTimeStamp.TabIndex = 11;
             this.lblTimeStamp.Text = "TimeStamp:";
             // 
-            // lblId
+            // lblAlias
             // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(3, 32);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(19, 13);
-            this.lblId.TabIndex = 9;
-            this.lblId.Text = "Id:";
+            this.lblAlias.AutoSize = true;
+            this.lblAlias.Location = new System.Drawing.Point(3, 32);
+            this.lblAlias.Name = "lblAlias";
+            this.lblAlias.Size = new System.Drawing.Size(32, 13);
+            this.lblAlias.TabIndex = 9;
+            this.lblAlias.Text = "Alias:";
             // 
             // lblType
             // 
@@ -129,11 +129,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dtpTimeStamp);
             this.Controls.Add(this.txtDynamic);
-            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.txtAlias);
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.lblDynamic);
             this.Controls.Add(this.lblTimeStamp);
-            this.Controls.Add(this.lblId);
+            this.Controls.Add(this.lblAlias);
             this.Controls.Add(this.lblType);
             this.Name = "EventInputControl";
             this.Size = new System.Drawing.Size(532, 103);
@@ -146,11 +146,11 @@
 
         private System.Windows.Forms.DateTimePicker dtpTimeStamp;
         private System.Windows.Forms.TextBox txtDynamic;
-        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtAlias;
         private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label lblDynamic;
         private System.Windows.Forms.Label lblTimeStamp;
-        private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.Label lblAlias;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.ToolTip ttiDynamic;
     }

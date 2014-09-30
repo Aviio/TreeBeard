@@ -34,7 +34,7 @@
             this.txtType = new System.Windows.Forms.TextBox();
             this.lbl1 = new System.Windows.Forms.Label();
             this.lbl3 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.txtAlias = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbl4
@@ -51,9 +51,9 @@
             // 
             this.txtArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtArgs.Location = new System.Drawing.Point(371, 3);
+            this.txtArgs.Location = new System.Drawing.Point(384, 3);
             this.txtArgs.Name = "txtArgs";
-            this.txtArgs.Size = new System.Drawing.Size(419, 20);
+            this.txtArgs.Size = new System.Drawing.Size(406, 20);
             this.txtArgs.TabIndex = 13;
             // 
             // lbl2
@@ -61,9 +61,9 @@
             this.lbl2.AutoSize = true;
             this.lbl2.Location = new System.Drawing.Point(163, 6);
             this.lbl2.Name = "lbl2";
-            this.lbl2.Size = new System.Drawing.Size(40, 13);
+            this.lbl2.Size = new System.Drawing.Size(53, 13);
             this.lbl2.TabIndex = 12;
-            this.lbl2.Text = "\", id : \"";
+            this.lbl2.Text = "\", alias : \"";
             // 
             // txtType
             // 
@@ -84,24 +84,24 @@
             // lbl3
             // 
             this.lbl3.AutoSize = true;
-            this.lbl3.Location = new System.Drawing.Point(315, 6);
+            this.lbl3.Location = new System.Drawing.Point(328, 6);
             this.lbl3.Name = "lbl3";
             this.lbl3.Size = new System.Drawing.Size(50, 13);
             this.lbl3.TabIndex = 15;
             this.lbl3.Text = "\", args : [";
             // 
-            // txtId
+            // txtAlias
             // 
-            this.txtId.Location = new System.Drawing.Point(209, 3);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(100, 20);
-            this.txtId.TabIndex = 16;
+            this.txtAlias.Location = new System.Drawing.Point(222, 3);
+            this.txtAlias.Name = "txtAlias";
+            this.txtAlias.Size = new System.Drawing.Size(100, 20);
+            this.txtAlias.TabIndex = 16;
             // 
             // InputControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.txtAlias);
             this.Controls.Add(this.lbl3);
             this.Controls.Add(this.lbl4);
             this.Controls.Add(this.txtArgs);
@@ -123,6 +123,6 @@
         private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Label lbl3;
-        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtAlias;
     }
 }

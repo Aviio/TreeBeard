@@ -39,7 +39,7 @@ namespace TreeBeard.Configuration
         {
             ConfigurationInput input = new ConfigurationInput();
 
-            input.Initialize(GetArgs((string)value.type, (string)(value.id ?? string.Empty), value.args));
+            input.Initialize(GetArgs((string)value.type, (string)(value.alias ?? string.Empty), value.args));
             Inputs.Add(input);
         }
 

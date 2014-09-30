@@ -70,11 +70,11 @@ namespace TreeBeard.Extensions
             return filter;
         }
 
-        public static IInput ConstructInput(this string type, string id, params string[] args)
+        public static IInput ConstructInput(this string type, string alias, params string[] args)
         {
             IInput input = Construct<IInput>(type, args);
             input.Type = type;
-            input.Id = id;
+            input.Alias = alias;
 
             return input;
         }

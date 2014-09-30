@@ -1,1 +1,1 @@
-﻿InstallUtil /u TreeBeard.Service.exe
+﻿"%~dp0TreeBeard.Service.exe" --uninstall

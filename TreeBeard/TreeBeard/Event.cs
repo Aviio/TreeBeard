@@ -6,17 +6,21 @@ using System.Dynamic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Xml;
 
 namespace TreeBeard
 {
     public sealed class Event : DynamicObject
     {
         private Dictionary<string, object> _dictionary = new Dictionary<string, object>();
+        private string _eventAlias;
 
-        public string Type { get; set; }
-        public string Id { get; set; }
-        public DateTime TimeStamp { get; set; }
+
+        public string EventType { get; set; }
+        public string EventAlias {
+            get { return (!string.IsNullOrEmpty(_eventAlias)) ? _eventAlias : EventType; }
+            set { _eventAlias = value; }
+        }
+        public DateTime EventTimeStamp { get; set; }
 
         public object this[string key]
         {
@@ -26,20 +30,21 @@ namespace TreeBeard
 
         public Event()
         {
-            TimeStamp = DateTime.Now;
+            EventTimeStamp = DateTime.Now;
         }
 
-        public Event(string type, string id) : this()
+        public Event(string type, string alias)
+            : this()
         {
-            Type = type;
-            Id = id;
+            EventType = type;
+            EventAlias = alias;
         }
 
-        public Event(string type, string id, DateTime timeStamp)
+        public Event(string type, string alias, DateTime timeStamp)
         {
-            Type = type;
-            Id = id;
-            TimeStamp = timeStamp;
+            EventType = type;
+            EventAlias = alias;
+            EventTimeStamp = timeStamp;
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
@@ -86,16 +91,16 @@ namespace TreeBeard
 
         public bool HasMember(string propName)
         {
-            return (propName == "Type" || propName == "Id" || propName == "TimeStamp" || _dictionary.ContainsKey(propName.ToLower()));
+            return (propName == "EventType" || propName == "EventAlias" || propName == "EventTimeStamp" || _dictionary.ContainsKey(propName.ToLower()));
         }
 
         public IEnumerable<KeyValuePair<string, object>> GetMembers(bool includeInstanceMembers = false)
         {
             if (includeInstanceMembers)
             {
-                yield return new KeyValuePair<string, object>("Type", Type);
-                yield return new KeyValuePair<string, object>("Id", Id);
-                yield return new KeyValuePair<string, object>("TimeStamp", TimeStamp);
+                yield return new KeyValuePair<string, object>("EventType", EventType);
+                yield return new KeyValuePair<string, object>("EventAlias", EventAlias);
+                yield return new KeyValuePair<string, object>("EventTimeStamp", EventTimeStamp);
             }
         
             foreach (var kvp in _dictionary)
@@ -129,9 +134,9 @@ namespace TreeBeard
 
         public string AsString()
         {
-            string source = Type;
-            if (!string.IsNullOrEmpty(Id)) source += ":" + Id;
-            return string.Format("[{0}] [{1}] {2}", TimeStamp, source, AsJson(false));
+            string source = EventType;
+            if (EventAlias != EventType) source += ":" + EventAlias;
+            return string.Format("[{0}] [{1}] {2}", EventTimeStamp, source, AsJson(false));
         }
     }
 }

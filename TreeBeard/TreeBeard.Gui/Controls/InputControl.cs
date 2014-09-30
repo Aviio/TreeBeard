@@ -18,7 +18,7 @@ namespace TreeBeard.Gui.Controls
         {
             try
             {
-                List<string> fullArgs = new List<string> { txtType.Text, txtId.Text };
+                List<string> fullArgs = new List<string> { txtType.Text, txtAlias.Text };
                 string[] args = txtArgs.Text.SplitCsv();
                 if (args != null)
                 {
